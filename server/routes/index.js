@@ -1,6 +1,6 @@
-import organization from './organization';
+import races from './races';
 const routers = {
-  organization
+  races
 };
 export {
   routers as default,

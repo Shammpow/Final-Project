@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     speed: {
-      type: DataTypes.VARCHAR(2),
+      type: DataTypes.INTEGER(2),
       allowNull: false,
     },
     size: {
