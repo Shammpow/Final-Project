@@ -3,7 +3,7 @@ const db = require("../models");
 // Defining methods for the booksController
 const controller = {
   findAll: (req, res) => {
-    db.Organization.findAll({
+    db.BaseRaces.findAll({
         where: {
           inactive: false
         }
@@ -12,7 +12,7 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Organization.findOne({
+    db.BaseRaces.findOne({
         where: {
           id: req.params.id,
           inactive: false
@@ -30,7 +30,7 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Organization.create({
+    db.BaseRaces.create({
         name: req.body.name,
         description: req.body.description
       })
@@ -38,7 +38,7 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Organization.update({
+    db.BaseRaces.update({
         name: req.body.name,
         description: req.body.description
       }, {
@@ -51,7 +51,7 @@ const controller = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Organization.update({
+    db.BaseRaces.update({
         inactive: true
       }, {
         where: {
