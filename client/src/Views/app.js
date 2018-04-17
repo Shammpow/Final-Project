@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Races from './Races';
+import Stats from './StatRoller';
 import './app.scss';
 export default props =>
 <BrowserRouter>
@@ -15,6 +16,7 @@ export default props =>
 
     <Route exact path="/" component={Home}/>
     <Route path="/races" component={Races}/>
+    <Route path="/stats" component={Stats}/>
     <Route path="/team" component={Home}/>
   </div>
 </BrowserRouter>
