@@ -160,13 +160,13 @@ class StatRoller extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="container roller">
                 <h1>
                     Character Sheet
                 </h1>
                 <div className="stats">
                     <span onClick={() => this.buttonRoll()} className="reroll">
-                        �</span>
+                        <img id="d20Roller" src="./public/images/d20-roller.png" alt="d20 Roller"></img></span>
                     <span>
                         <select className="levelchange" defaultValue={this.state.level} value={this.state.level} onChange={this.levelSelect}>
                             <option value="1" prf="2">1</option>

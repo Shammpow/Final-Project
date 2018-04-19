@@ -100,7 +100,7 @@ const Home = props =>
             </li>
 
             <li className="tools list-group-item">
-              Tools: {props.todo}.
+              Alignment: {props.todo}.
               Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </li>
           </ul>
