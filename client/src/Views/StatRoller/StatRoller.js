@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import ClassRoller from '../ClassRoller';
-import Home from '../Home'
-import './StatRoller.scss'
+import Home from '../Home';
+import './StatRoller.scss';
+import racesAPI from '../../Data/races-api'
 
 class StatRoller extends Component {
     state = {
@@ -29,7 +29,11 @@ class StatRoller extends Component {
         baseAC: "",
         align: "",
         initiative: "",
-        class: ""
+        class: "",
+        placeholder: "TODO",
+        race: "",
+        speed: "",
+        languages: "",
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -110,6 +114,10 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        racesAPI.getAll().then(stuff => {
+            let choice = stuff[Math.floor(Math.random() * stuff.length)]
+            this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
     };
     buttonRoll = () => {
         this.rollStr();
@@ -120,6 +128,11 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        racesAPI.getAll().then(stuff => {
+            let choice = stuff[Math.floor(Math.random() * stuff.length)]
+            this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
+
     };
     determinePRF(level) {
         let prf;
@@ -173,9 +186,10 @@ class StatRoller extends Component {
         return (
             <div className="container roller">
                 <h1>Character Sheet</h1>
-                <span onClick={() => this.buttonRoll()} className="reroll">Roll for Stats!
-                    <img id="d20Roller" src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
-                <div className="stats col-sm">
+                <span  className="reroll">Roll for Stats!
+                    <img id="d20Roller" onClick={() => this.buttonRoll()} 
+                    src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
+                <div className="stats">
 
                     <span>Level Selector
                         <select className="levelchange" defaultValue={this.state.level} value={this.state.level} onChange={this.levelSelect}>
@@ -203,7 +217,7 @@ class StatRoller extends Component {
                     </span>
                         <ul id="classTitle" className="list-group">
                             <li className="list-group-item">
-                            Level: {this.state.level} Race: {this.state.placeholder} Class: {this.state.placeholder}
+                            {this.state.align} Level: {this.state.level} {this.state.race} {this.state.class}
                             </li>
                         </ul>
                 </div>
@@ -233,6 +247,8 @@ class StatRoller extends Component {
                     prf={this.state.prf}
                     align={this.state.align}
                     rolledClass={this.state.class}
+                    speed={this.state.speed}
+                    languages={this.state.language}
                 />
             </div>
         )
