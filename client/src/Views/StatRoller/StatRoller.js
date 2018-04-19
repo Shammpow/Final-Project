@@ -151,7 +151,7 @@ class StatRoller extends Component {
         const Arr1 = ['Lawful', 'Neutral', 'Chaotic']
         const Arr2 = ['Good', 'Neutral', 'Evil']
         let align = Arr1[Math.floor(Math.random() * Arr1.length)] + " " + Arr2[Math.floor(Math.random() * Arr2.length)];
-        if (align == "Neutral Neutral"){
+        if (align === "Neutral Neutral"){
             align = "True Neutral";
         }
         this.setState({
@@ -166,7 +166,7 @@ class StatRoller extends Component {
                 </h1>
                 <div className="stats">
                     <span onClick={() => this.buttonRoll()} className="reroll">
-                        <img id="d20Roller" src="./public/images/d20-roller.png" alt="d20 Roller"></img></span>
+                        <img id="d20Roller" src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
                     <span>
                         <select className="levelchange" defaultValue={this.state.level} value={this.state.level} onChange={this.levelSelect}>
                             <option value="1" prf="2">1</option>
