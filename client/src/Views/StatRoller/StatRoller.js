@@ -6,16 +6,22 @@ class StatRoller extends Component {
     state = {
         str: "",
         strmod: "",
+        strsave: "",
         dex: "",
         dexmod: "",
+        dexsave: "",
         con: "",
         conmod: "",
+        consave: "",
         int: "",
         intmod: "",
+        intsave: "",
         wis: "",
         wismod: "",
+        wissave: "",
         cha: "",
         chamod: "",
+        chasave: "",
         level: 1,
         prf: 2,
         baseAC: "",
@@ -30,7 +36,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             str: result,
-            strmod: ultMod
+            strmod: ultMod,
+            strsave: ultMod
         });
     };
     rollDex = event => {
@@ -42,6 +49,7 @@ class StatRoller extends Component {
         this.setState({
             dex: result,
             dexmod: ultMod,
+            dexsave: ultMod,
             baseAC: baseAC,
             initiative: ultMod
         });
@@ -53,7 +61,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             con: result,
-            conmod: ultMod
+            conmod: ultMod,
+            consave: ultMod
         });
     };
     rollInt = event => {
@@ -63,7 +72,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             int: result,
-            intmod: ultMod
+            intmod: ultMod,
+            intsave: ultMod
         });
     };
     rollWis = event => {
@@ -73,7 +83,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             wis: result,
-            wismod: ultMod
+            wismod: ultMod,
+            wissave: ultMod
         });
     };
     rollCha = event => {
@@ -83,7 +94,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             cha: result,
-            chamod: ultMod
+            chamod: ultMod,
+            chasave: ultMod
         });
     };
     componentDidMount = () => {
@@ -195,6 +207,12 @@ class StatRoller extends Component {
                     intmod={this.state.intmod}
                     wismod={this.state.wismod}
                     chamod={this.state.chamod}
+                    strsave={this.state.strsave}
+                    dexsave={this.state.dexsave}
+                    consave={this.state.consave}
+                    intsave={this.state.intsave}
+                    wissave={this.state.wissave}
+                    chasave={this.state.chasave}
                     baseAC={this.state.baseAC}
                     initiative={this.state.initiative}
                     prf={this.state.prf}
