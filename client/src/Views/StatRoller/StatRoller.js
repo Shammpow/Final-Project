@@ -165,7 +165,7 @@ class StatRoller extends Component {
                 <h1>Character Sheet</h1>
                 <span onClick={() => this.buttonRoll()} className="reroll">Roll for Stats!
                     <img id="d20Roller" src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
-                <div className="stats">
+                <div className="stats col-sm">
 
                     <span>Level Selector
                         <select className="levelchange" defaultValue={this.state.level} value={this.state.level} onChange={this.levelSelect}>
@@ -191,6 +191,11 @@ class StatRoller extends Component {
                             <option value="20" prf="6">20</option>
                         </select>
                     </span>
+                        <ul id="classTitle" className="list-group">
+                            <li className="list-group-item">
+                            Level: {this.state.level} Race: {this.state.placeholder} Class: {this.state.placeholder}
+                            </li>
+                        </ul>
                 </div>
 
                 <Home
