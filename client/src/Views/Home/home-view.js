@@ -2,7 +2,7 @@ import React from 'react';
 import './home-view.scss';
 const Home = props =>
   <div className='home'>
-    
+
     <div className="main-container container">
       <div className="stat-container container row">
         <div className="stats col-sm-3">
@@ -52,6 +52,8 @@ const Home = props =>
               <li className="speed list-group-item">
                 Speed: {props.todo}
               </li>
+              <li className="rolledClass">
+                Class: {props.rolledClass}</li>
             </ul>
 
             <ul className="wallOfText skills/resistances list-group">
