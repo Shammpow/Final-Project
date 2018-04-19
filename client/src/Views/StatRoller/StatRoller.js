@@ -29,7 +29,8 @@ class StatRoller extends Component {
         baseAC: "",
         align: "",
         initiative: "",
-        class: ""
+        class: "",
+        hp: ""
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -146,9 +147,11 @@ class StatRoller extends Component {
     }
     levelSelect = props => {
         let newprf = this.determinePRF(props.target.value);
+        let newHP = this.rollHP(props.target.value);
         this.setState({
             level: props.target.value,
-            prf: newprf
+            prf: newprf,
+            hp: newHP
         })
     }
     rollAlign = () => {
@@ -163,11 +166,102 @@ class StatRoller extends Component {
         })
     }
     rollThatClass = () => {
-        const classArr = ['Berserker Barbarian', 'Totem Warrior Barbarian', 'College of Lore Bard', 'College of Valor Bard', 'Knowledge Cleric', 'Life Cleric', 'Light Cleric', 'Nature Cleric', 'Tempest Cleric', 'Trickery Cleric', 'War Cleric', 'Moon Druid', 'Arctic Druid', 'Coast Druid', 'Desert Druid', 'Forest Druid', 'Grassland Druid', 'Mountain Druid', 'Swamp Druid', 'Underdark Druid', 'Champion Fighter', 'Battle Master Fighter', 'Eldritch Knight Fighter', 'Open Palm Monk', 'Shadow Monk', '4 Elements Monk', 'Devotion Oath Paladin', 'Ancient Oath Paladin', 'Vengeance Oath Paladin', 'Hunter Ranger', 'Beast Master Ranger', 'Thief Rogue', 'Assassin Rogue', 'Arcane Trickster Rogue', 'Wild Sorcerer', 'Black Dragon Sorcerer', 'Blue Dragon Sorcerer', 'Brass Dragon Sorcerer', 'Bronze Dragon Sorcerer', 'Copper Dragon Sorcerer', 'Gold Dragon Sorcerer', 'Green Dragon Sorcerer', 'Red Dragon Sorcerer', 'Silver Dragon Sorcerer', 'White Dragon Sorcerer', 'Fey Blade-Pact Warlock', 'Fey Chain-Pact Warlock', 'Fey Tome-Pact', 'Old One Blade-Pact Warlock', 'Old One Chain-Pact Warlock', 'Old Tome-Pact Warlock', 'Infernal Blade-Pact Warlock', 'Infernal Chain-Pact Warlock', 'Infernal Tome-Pact Warlock', 'Abjuration Wizard', 'Conjuration Wizard', 'Divination Wizard', 'Enchantment Wizard', 'Evocation Wizard', 'Illusion Wizard', 'Necromancy Wizard', 'Transmutation Wizard'];
-        let rolledClass = classArr[Math.floor(Math.random() * classArr.length)];
-        this.setState({
-            class: rolledClass
-        })
+        const baseArr = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
+        const barbSubs = ['Berserker', 'Totem Warrior'];
+        const bardSubs = ['College of Lore', 'College of Valor']
+        const clerSubs = ['Knowledge', 'Life', 'Light', 'Nature', 'Tempest', 'Trickery', 'War']
+        const druidSubs = ['Moon', 'Arctic', 'Coast', 'Desert', 'Forest', 'Grassland', 'Mountain', 'Swamp', 'Underdark']
+        const fighSubs = ['Champion', 'Battle Master', 'Eldritch Knight']
+        const monkSubs = ['Open Palm', 'Shadow', '4 Elements']
+        const palaSubs = ['Devotion Oath', 'Ancient Oath', 'Vengeance Oath']
+        const rangSubs = ['Hunter', 'Beast Master']
+        const rogSubs = ['Thief', 'Assassin', 'Arcane Trickster']
+        const sorcSubs = ['Wild', 'Black Dragon', 'Blue Dragon', 'Brass Dragon', 'Bronze Dragon', 'Copper Dragon', 'Gold Dragon', 'Green Dragon', 'Red Dragon', 'Silver Dragon', 'White Dragon']
+        const warlSubs = ['Fey Blade-Pact', 'Fey Chain-Pact', 'Fey Tome-Pact', 'Old One Blade-Pact', 'Old One Chain-Pact', 'Old Tome-Pact', 'Infernal Blade-Pact', 'Infernal Chain-Pact', 'Infernal Tome-Pact']
+        const wizSubs = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation']
+
+        let baseRoll = baseArr[Math.floor(Math.random() * baseArr.length)];
+        let rolledClass;
+        if (baseRoll == 'Barbarian') {
+            rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Bard') {
+            rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Cleric') {
+            rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Druid') {
+            rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Fighter') {
+            rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Monk') {
+            rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Paladin') {
+            rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Ranger') {
+            rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Rogue') {
+            rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Sorcerer') {
+            rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Warlock') {
+            rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+        else if (baseRoll == 'Wizard') {
+            rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
+            return this.setState({
+                class: rolledClass
+            })
+        }
+    }
+    rollHP(level) {
+        let hitpoints = 0;
+        for (let i = 0; i < level - 1; i++) {
+            hitpoints = hitpoints + Math.floor(Math.random() * 12) + 1;
+            console.log("Roll " + i + ": " + hitpoints)
+        }
+        return hitpoints;
     }
     render() {
         return (
@@ -228,6 +322,7 @@ class StatRoller extends Component {
                     prf={this.state.prf}
                     align={this.state.align}
                     rolledClass={this.state.class}
+                    hp={this.state.hp}
                 />
             </div>
         )

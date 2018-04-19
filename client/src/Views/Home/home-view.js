@@ -44,7 +44,7 @@ const Home = props =>
           <div className="container">
             <ul className="personStuff list-group">
               <li className="hp list-group-item">
-                Hit Points: {props.todo}
+                Hit Points: {props.hp}
               </li>
               <li className="ac list-group-item">
                 Armor Class: {props.baseAC}
