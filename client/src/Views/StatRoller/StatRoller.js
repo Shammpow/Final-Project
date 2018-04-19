@@ -17,7 +17,8 @@ class StatRoller extends Component {
         chamod: "",
         level: 1,
         prf: 2,
-        baseAC: ""
+        baseAC: "",
+        align: ""
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -89,7 +90,7 @@ class StatRoller extends Component {
         this.rollInt();
         this.rollWis();
         this.rollCha();
-        // this.rollPro();
+        this.rollAlign();
     };
     buttonRoll = () => {
         this.rollStr();
@@ -98,29 +99,29 @@ class StatRoller extends Component {
         this.rollInt();
         this.rollWis();
         this.rollCha();
+        this.rollAlign();
     };
     determinePRF(level) {
-        let blah;
-
+        let prf;
         if (level < 5) {
-            blah = 2;
-            return blah;
+            prf = 2;
+            return prf;
         }
         else if (level < 9) {
-            blah = 3;
-            return blah;
+            prf = 3;
+            return prf;
         }
         else if (level < 13) {
-            blah = 4;
-            return blah;
+            prf = 4;
+            return prf;
         }
         else if (level < 17) {
-            blah = 5;
-            return blah;
+            prf = 5;
+            return prf;
         }
         else if (level < 21) {
-            blah = 6;
-            return blah;
+            prf = 6;
+            return prf;
         }
     }
     levelSelect = props => {
@@ -130,10 +131,17 @@ class StatRoller extends Component {
             prf: newprf
         })
     }
-    // rollPro = blah => {
-    //     this.setState({
-    //     })
-    // };
+    rollAlign = () => {
+        const Arr1 = ['Lawful', 'Neutral', 'Chaotic']
+        const Arr2 = ['Good', 'Neutral', 'Evil']
+        let align = Arr1[Math.floor(Math.random() * Arr1.length)] + " " + Arr2[Math.floor(Math.random() * Arr2.length)];
+        if (align == "Neutral Neutral"){
+            align = "True Neutral";
+        }
+        this.setState({
+            align: align
+        })
+    }
     render() {
         return (
             <div className="container">
@@ -174,6 +182,7 @@ class StatRoller extends Component {
                             <p> Charisma: {this.state.cha} Mod: {this.state.chamod} </p>
                             <p> Level: {this.state.level} Proficiency: {this.state.prf} </p>
                             <p> Base AC: {this.state.baseAC} </p>
+                            <p> Alignment: {this.state.align} </p>
                         </div>
                     </div>
                 </div>
