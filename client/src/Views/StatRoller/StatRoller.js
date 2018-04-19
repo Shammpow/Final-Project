@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import Home from '../Home'
 
 class StatRoller extends Component {
     state = {
@@ -18,7 +19,9 @@ class StatRoller extends Component {
         level: 1,
         prf: 2,
         baseAC: "",
-        align: ""
+        align: "",
+        initiative: "",
+        placeholder: "TODO"
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -39,7 +42,8 @@ class StatRoller extends Component {
         this.setState({
             dex: result,
             dexmod: ultMod,
-            baseAC: baseAC
+            baseAC: baseAC,
+            initiative: ultMod
         });
     };
     rollCon = event => {
@@ -127,7 +131,7 @@ class StatRoller extends Component {
     levelSelect = props => {
         let newprf = this.determinePRF(props.target.value);
         this.setState({
-            level: props.target.value,            
+            level: props.target.value,
             prf: newprf
         })
     }
@@ -145,6 +149,9 @@ class StatRoller extends Component {
     render() {
         return (
             <div className="container">
+                <h1>
+                    Character Sheet
+                </h1>
                 <div className="stats">
                     <span onClick={() => this.buttonRoll()} className="reroll">
                         �</span>
@@ -172,20 +179,28 @@ class StatRoller extends Component {
                             <option value="20" prf="6">20</option>
                         </select>
                     </span>
-                    <div className="stats2">
-                        <div>
-                            <p> Strength: {this.state.str} Mod: {this.state.strmod} </p>
-                            <p> Dex: {this.state.dex} Mod: {this.state.dexmod} </p>
-                            <p> Con: {this.state.con} Mod: {this.state.conmod} </p>
-                            <p> Int: {this.state.int} Mod: {this.state.intmod} </p>
-                            <p> Wisdom: {this.state.wis} Mod: {this.state.wismod} </p>
-                            <p> Charisma: {this.state.cha} Mod: {this.state.chamod} </p>
-                            <p> Level: {this.state.level} Proficiency: {this.state.prf} </p>
-                            <p> Base AC: {this.state.baseAC} </p>
-                            <p> Alignment: {this.state.align} </p>
-                        </div>
-                    </div>
                 </div>
+
+                <Home
+                    str={this.state.str}
+                    dex={this.state.dex}
+                    con={this.state.con}
+                    int={this.state.int}
+                    wis={this.state.wis}
+                    cha={this.state.cha}
+                    todo={this.state.placeholder}
+                    strmod={this.state.strmod}
+                    dexmod={this.state.dexmod}
+                    conmod={this.state.conmod}
+                    intmod={this.state.intmod}
+                    wismod={this.state.wismod}
+                    chamod={this.state.chamod}
+                    baseAC={this.state.baseAC}
+                    initiative={this.state.initiative}
+                    prf={this.state.prf}
+                    align={this.state.align}
+                />
+
             </div>
         )
     }

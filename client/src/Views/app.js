@@ -14,7 +14,7 @@ export default props =>
 
     <hr/>
 
-    <Route exact path="/" component={Home}/>
+    <Route exact path="/" component={Stats}/>
     <Route path="/races" component={Races}/>
     <Route path="/stats" component={Stats}/>
     <Route path="/team" component={Home}/>
