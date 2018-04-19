@@ -6,19 +6,26 @@ class StatRoller extends Component {
     state = {
         str: "",
         strmod: "",
+        strsave: "",
         dex: "",
         dexmod: "",
+        dexsave: "",
         con: "",
         conmod: "",
+        consave: "",
         int: "",
         intmod: "",
+        intsave: "",
         wis: "",
         wismod: "",
+        wissave: "",
         cha: "",
         chamod: "",
+        chasave: "",
         level: 1,
         prf: 2,
         baseAC: "",
+        align: "",
         initiative: "",
         placeholder: "TODO"
     };
@@ -29,7 +36,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             str: result,
-            strmod: ultMod
+            strmod: ultMod,
+            strsave: ultMod
         });
     };
     rollDex = event => {
@@ -41,6 +49,7 @@ class StatRoller extends Component {
         this.setState({
             dex: result,
             dexmod: ultMod,
+            dexsave: ultMod,
             baseAC: baseAC,
             initiative: ultMod
         });
@@ -52,7 +61,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             con: result,
-            conmod: ultMod
+            conmod: ultMod,
+            consave: ultMod
         });
     };
     rollInt = event => {
@@ -62,7 +72,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             int: result,
-            intmod: ultMod
+            intmod: ultMod,
+            intsave: ultMod
         });
     };
     rollWis = event => {
@@ -72,7 +83,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             wis: result,
-            wismod: ultMod
+            wismod: ultMod,
+            wissave: ultMod
         });
     };
     rollCha = event => {
@@ -82,7 +94,8 @@ class StatRoller extends Component {
         let ultMod = Math.floor(blahMod);
         this.setState({
             cha: result,
-            chamod: ultMod
+            chamod: ultMod,
+            chasave: ultMod
         });
     };
     componentDidMount = () => {
@@ -93,7 +106,7 @@ class StatRoller extends Component {
         this.rollInt();
         this.rollWis();
         this.rollCha();
-        // this.rollPro();
+        this.rollAlign();
     };
     buttonRoll = () => {
         this.rollStr();
@@ -102,10 +115,10 @@ class StatRoller extends Component {
         this.rollInt();
         this.rollWis();
         this.rollCha();
+        this.rollAlign();
     };
     determinePRF(level) {
         let prf;
-
         if (level < 5) {
             prf = 2;
             return prf;
@@ -132,6 +145,17 @@ class StatRoller extends Component {
         this.setState({
             level: props.target.value,
             prf: newprf
+        })
+    }
+    rollAlign = () => {
+        const Arr1 = ['Lawful', 'Neutral', 'Chaotic']
+        const Arr2 = ['Good', 'Neutral', 'Evil']
+        let align = Arr1[Math.floor(Math.random() * Arr1.length)] + " " + Arr2[Math.floor(Math.random() * Arr2.length)];
+        if (align == "Neutral Neutral"){
+            align = "True Neutral";
+        }
+        this.setState({
+            align: align
         })
     }
     render() {
@@ -183,9 +207,16 @@ class StatRoller extends Component {
                     intmod={this.state.intmod}
                     wismod={this.state.wismod}
                     chamod={this.state.chamod}
+                    strsave={this.state.strsave}
+                    dexsave={this.state.dexsave}
+                    consave={this.state.consave}
+                    intsave={this.state.intsave}
+                    wissave={this.state.wissave}
+                    chasave={this.state.chasave}
                     baseAC={this.state.baseAC}
                     initiative={this.state.initiative}
                     prf={this.state.prf}
+                    align={this.state.align}
                 />
 
             </div>

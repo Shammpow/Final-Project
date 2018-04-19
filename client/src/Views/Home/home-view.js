@@ -11,31 +11,43 @@ const Home = props =>
               Strength: {props.str}
               <br></br>
               Mods: {props.strmod}
+              <br></br>
+              Save: {props.strsave}
             </li>
             <li className="dex list-group-item">
               Dexterity: {props.dex}
               <br></br>
               Mods: {props.dexmod}
+              <br></br>
+              Save: {props.dexsave}
             </li>
             <li className="con list-group-item">
               Constitution: {props.con}
               <br></br>
               Mods: {props.conmod}
+              <br></br>
+              Save: {props.consave}
             </li>
             <li className="int list-group-item">
               Intelligence: {props.int}
               <br></br>
               Mods: {props.intmod}
+              <br></br>
+              Save: {props.intsave}
             </li>
             <li className="wis list-group-item">
               Wisdom: {props.wis}
               <br></br>
               Mods: {props.wismod}
+              <br></br>
+              Save: {props.wissave}
             </li>
             <li className="cha list-group-item">
               Charisma: {props.cha}
               <br></br>
               Mods: {props.chamod}
+              <br></br>
+              Save: {props.chasave}
             </li>
           </ul>
 
