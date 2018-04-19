@@ -2,9 +2,7 @@ import React from 'react';
 import './home-view.scss';
 const Home = props =>
   <div className='home'>
-    <h1>
-      Character Sheet
-    </h1>
+    
     <div className="main-container container">
       <div className="stat-container container row">
         <div className="stats col-sm-3">
@@ -12,32 +10,32 @@ const Home = props =>
             <li className="str list-group-item">
               Strength: {props.str}
               <br></br>
-              Mods: {props.strmod}
+              Mods: {props.strmod} Save: {props.strsave}
             </li>
             <li className="dex list-group-item">
               Dexterity: {props.dex}
               <br></br>
-              Mods: {props.dexmod}
+              Mods: {props.dexmod} Save: {props.dexsave}
             </li>
             <li className="con list-group-item">
               Constitution: {props.con}
               <br></br>
-              Mods: {props.conmod}
+              Mods: {props.conmod} Save: {props.consave}
             </li>
             <li className="int list-group-item">
               Intelligence: {props.int}
               <br></br>
-              Mods: {props.intmod}
+              Mods: {props.intmod} Save: {props.intsave}
             </li>
             <li className="wis list-group-item">
               Wisdom: {props.wis}
               <br></br>
-              Mods: {props.wismod}
+              Mods: {props.wismod} Save: {props.wissave}
             </li>
             <li className="cha list-group-item">
               Charisma: {props.cha}
               <br></br>
-              Mods: {props.chamod}
+              Mods: {props.chamod} Save: {props.chasave}
             </li>
           </ul>
 
@@ -76,7 +74,7 @@ const Home = props =>
               Initiative: {props.initiative}
             </li>
             <li className="proficiency list-group-item">
-              Proficiency: Starts at 2, Change based on level --- TODO
+              Proficiency: {props.prf}
             </li>
             <li className="hitDice list-group-item">
               Hit Dice: {props.todo}
@@ -90,7 +88,7 @@ const Home = props =>
             </li>
 
             <li className="tools list-group-item">
-              Tools: {props.todo}.
+              Alignment: {props.todo}.
               Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </li>
           </ul>
@@ -98,5 +96,6 @@ const Home = props =>
         </div>
       </div>
     </div>
+    <footer></footer>
   </div>
 export default Home;
