@@ -1,11 +1,102 @@
 import React from 'react';
 import './home-view.scss';
-export default props =>
-<div className='home'>
-  <h1>
-    Welcome!
-  </h1>
-  <div>
-    This is an example homepage.
+const Home = props =>
+  <div className='home'>
+    <h1>
+      Character Sheet
+    </h1>
+    <div className="main-container container">
+      <div className="stat-container container row">
+        <div className="stats col-sm-3">
+          <ul className="individualStats list-group">
+            <li className="str list-group-item">
+              Strength: {props.str}
+              <br></br>
+              Mods: {props.strmod}
+            </li>
+            <li className="dex list-group-item">
+              Dexterity: {props.dex}
+              <br></br>
+              Mods: {props.dexmod}
+            </li>
+            <li className="con list-group-item">
+              Constitution: {props.con}
+              <br></br>
+              Mods: {props.conmod}
+            </li>
+            <li className="int list-group-item">
+              Intelligence: {props.int}
+              <br></br>
+              Mods: {props.intmod}
+            </li>
+            <li className="wis list-group-item">
+              Wisdom: {props.wis}
+              <br></br>
+              Mods: {props.wismod}
+            </li>
+            <li className="cha list-group-item">
+              Charisma: {props.cha}
+              <br></br>
+              Mods: {props.chamod}
+            </li>
+          </ul>
+
+        </div>
+        <div className="col-sm">
+          <div className="container">
+            <ul className="personStuff list-group">
+              <li className="hp list-group-item">
+                Hit Points: {props.todo}
+              </li>
+              <li className="ac list-group-item">
+                Armor Class: {props.baseAC}
+              </li>
+              <li className="speed list-group-item">
+                Speed: {props.todo}
+              </li>
+            </ul>
+
+            <ul className="wallOfText skills/resistances list-group">
+              <li className="skills list-group-item">
+                Skills: {props.todo}.
+                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
+              <li className="resistances list-group-item">
+                Resistances: {props.todo}.
+                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
+            </ul>
+
+          </div>
+        </div>
+        <div className="col-sm">
+          <ul className="personStuff list-group">
+
+            <li className="initiative list-group-item">
+              Initiative: {props.initiative}
+            </li>
+            <li className="proficiency list-group-item">
+              Proficiency: Starts at 2, Change based on level --- TODO
+            </li>
+            <li className="hitDice list-group-item">
+              Hit Dice: {props.todo}
+            </li>
+          </ul>
+
+          <ul className="wallOfText backgroundStuff list-group">
+            <li className="background list-group-item">
+              Background: {props.todo}.
+              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
+
+            <li className="tools list-group-item">
+              Tools: {props.todo}.
+              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+export default Home;

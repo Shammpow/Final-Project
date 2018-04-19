@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import Home from '../Home'
 
 class StatRoller extends Component {
     state = {
@@ -17,7 +18,9 @@ class StatRoller extends Component {
         chamod: "",
         level: 13,
         prf: "",
-        baseAC: ""
+        baseAC: "",
+        initiative: "",
+        placeholder: "TODO"
     };
     rollStr = event => {
         let firstRoll = Math.floor(Math.random() * 6) + 1;
@@ -44,7 +47,8 @@ class StatRoller extends Component {
         this.setState({
             dex: result,
             dexmod: ultMod,
-            baseAC: baseAC
+            baseAC: baseAC,
+            initiative: ultMod
         });
     };
     rollCon = event => {
@@ -128,20 +132,23 @@ class StatRoller extends Component {
       }
     render() {
         return (
-            <div className="stats">
-                <div className="stats2">
-                    <div>
-                        <p> Strength: {this.state.str} Mod: {this.state.strmod} </p>
-                        <p> Dex: {this.state.dex} Mod: {this.state.dexmod} </p>
-                        <p> Con: {this.state.con} Mod: {this.state.conmod} </p>
-                        <p> Int: {this.state.int} Mod: {this.state.intmod} </p>
-                        <p> Wisdom: {this.state.wis} Mod: {this.state.wismod} </p>
-                        <p> Charisma: {this.state.cha} Mod: {this.state.chamod} </p>
-                        <p> Level: {this.state.level} Proficiency: {this.state.prf} </p>
-                        <p> Base AC: {this.state.baseAC} </p>
-                    </div>
-                </div>
-            </div>
+            <Home 
+            str={this.state.str}
+            dex={this.state.dex}
+            con={this.state.con}
+            int={this.state.int}
+            wis={this.state.wis}
+            cha={this.state.cha}
+            todo={this.state.placeholder}
+            strmod={this.state.strmod}
+            dexmod={this.state.dexmod}
+            conmod={this.state.conmod}
+            intmod={this.state.intmod}
+            wismod={this.state.wismod}
+            chamod={this.state.chamod}
+            baseAC={this.state.baseAC}
+            initiative={this.state.initiative}
+            />
         )
     }
 }
