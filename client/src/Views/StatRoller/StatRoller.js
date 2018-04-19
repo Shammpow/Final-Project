@@ -18,7 +18,7 @@ class StatRoller extends Component {
         chamod: "",
         level: 1,
         prf: 2,
-        baseAC: ""
+        baseAC: "",
         initiative: "",
         placeholder: "TODO"
     };
@@ -104,60 +104,42 @@ class StatRoller extends Component {
         this.rollCha();
     };
     determinePRF(level) {
-        let blah;
+        let prf;
 
         if (level < 5) {
-            blah = 2;
-            return blah;
+            prf = 2;
+            return prf;
         }
         else if (level < 9) {
-            blah = 3;
-            return blah;
+            prf = 3;
+            return prf;
         }
         else if (level < 13) {
-            blah = 4;
-            return blah;
+            prf = 4;
+            return prf;
         }
         else if (level < 17) {
-            blah = 5;
-            return blah;
+            prf = 5;
+            return prf;
         }
         else if (level < 21) {
-            blah = 6;
-            return blah;
+            prf = 6;
+            return prf;
         }
     }
     levelSelect = props => {
         let newprf = this.determinePRF(props.target.value);
         this.setState({
-            level: props.target.value,            
+            level: props.target.value,
             prf: newprf
         })
     }
-    // rollPro = blah => {
-    //     this.setState({
-    //     })
-    // };
     render() {
         return (
-            <Home 
-            str={this.state.str}
-            dex={this.state.dex}
-            con={this.state.con}
-            int={this.state.int}
-            wis={this.state.wis}
-            cha={this.state.cha}
-            todo={this.state.placeholder}
-            strmod={this.state.strmod}
-            dexmod={this.state.dexmod}
-            conmod={this.state.conmod}
-            intmod={this.state.intmod}
-            wismod={this.state.wismod}
-            chamod={this.state.chamod}
-            baseAC={this.state.baseAC}
-            initiative={this.state.initiative}
-            />
             <div className="container">
+                <h1>
+                    Character Sheet
+                </h1>
                 <div className="stats">
                     <span onClick={() => this.buttonRoll()} className="reroll">
                         �</span>
@@ -185,19 +167,27 @@ class StatRoller extends Component {
                             <option value="20" prf="6">20</option>
                         </select>
                     </span>
-                    <div className="stats2">
-                        <div>
-                            <p> Strength: {this.state.str} Mod: {this.state.strmod} </p>
-                            <p> Dex: {this.state.dex} Mod: {this.state.dexmod} </p>
-                            <p> Con: {this.state.con} Mod: {this.state.conmod} </p>
-                            <p> Int: {this.state.int} Mod: {this.state.intmod} </p>
-                            <p> Wisdom: {this.state.wis} Mod: {this.state.wismod} </p>
-                            <p> Charisma: {this.state.cha} Mod: {this.state.chamod} </p>
-                            <p> Level: {this.state.level} Proficiency: {this.state.prf} </p>
-                            <p> Base AC: {this.state.baseAC} </p>
-                        </div>
-                    </div>
                 </div>
+
+                <Home
+                    str={this.state.str}
+                    dex={this.state.dex}
+                    con={this.state.con}
+                    int={this.state.int}
+                    wis={this.state.wis}
+                    cha={this.state.cha}
+                    todo={this.state.placeholder}
+                    strmod={this.state.strmod}
+                    dexmod={this.state.dexmod}
+                    conmod={this.state.conmod}
+                    intmod={this.state.intmod}
+                    wismod={this.state.wismod}
+                    chamod={this.state.chamod}
+                    baseAC={this.state.baseAC}
+                    initiative={this.state.initiative}
+                    prf={this.state.prf}
+                />
+
             </div>
         )
     }

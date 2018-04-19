@@ -2,9 +2,7 @@ import React from 'react';
 import './home-view.scss';
 const Home = props =>
   <div className='home'>
-    <h1>
-      Character Sheet
-    </h1>
+    
     <div className="main-container container">
       <div className="stat-container container row">
         <div className="stats col-sm-3">
@@ -76,7 +74,7 @@ const Home = props =>
               Initiative: {props.initiative}
             </li>
             <li className="proficiency list-group-item">
-              Proficiency: Starts at 2, Change based on level --- TODO
+              Proficiency: {props.prf}
             </li>
             <li className="hitDice list-group-item">
               Hit Dice: {props.todo}
