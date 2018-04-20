@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import ClassRoller from '../ClassRoller';
-import Home from '../Home'
-import './StatRoller.scss'
+import Home from '../Home';
+import './StatRoller.scss';
+import racesAPI from '../../Data/races-api'
 
 class StatRoller extends Component {
     state = {
@@ -30,6 +30,10 @@ class StatRoller extends Component {
         align: "",
         initiative: "",
         class: "",
+        placeholder: "TODO",
+        race: "",
+        speed: "",
+        languages: "",
         hp: ""
     };
     rollStr = event => {
@@ -111,6 +115,10 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        racesAPI.getAll().then(stuff => {
+            let choice = stuff[Math.floor(Math.random() * stuff.length)]
+            this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
     };
     buttonRoll = () => {
         this.rollStr();
@@ -121,6 +129,11 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        racesAPI.getAll().then(stuff => {
+            let choice = stuff[Math.floor(Math.random() * stuff.length)]
+            this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
+
     };
     determinePRF(level) {
         let prf;
@@ -267,8 +280,9 @@ class StatRoller extends Component {
         return (
             <div className="container roller">
                 <h1>Character Sheet</h1>
-                <span onClick={() => this.buttonRoll()} className="reroll">Roll for Stats!
-                    <img id="d20Roller" src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
+                <span  className="reroll">Roll for Stats!
+                    <img id="d20Roller" onClick={() => this.buttonRoll()} 
+                    src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
                 <div className="stats">
 
                     <span>Level Selector
@@ -295,6 +309,11 @@ class StatRoller extends Component {
                             <option value="20" prf="6">20</option>
                         </select>
                     </span>
+                        <ul id="classTitle" className="list-group">
+                            <li className="list-group-item">
+                            {this.state.align} Level: {this.state.level} {this.state.race} {this.state.class}
+                            </li>
+                        </ul>
                 </div>
 
                 <Home
@@ -323,6 +342,8 @@ class StatRoller extends Component {
                     align={this.state.align}
                     rolledClass={this.state.class}
                     hp={this.state.hp}
+                    speed={this.state.speed}
+                    languages={this.state.language}
                 />
             </div>
         )
