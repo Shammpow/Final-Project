@@ -34,7 +34,11 @@ class StatRoller extends Component {
         race: "",
         speed: "",
         languages: "",
-        hp: ""
+        hp: "",
+        feats: "",
+        traits: "",
+        spells: "",
+        cantrips: "",
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -114,10 +118,14 @@ class StatRoller extends Component {
         this.rollWis();
         this.rollCha();
         this.rollAlign();
-        this.rollThatClass();
+        const classID = this.rollThatClass();
         racesAPI.getAll().then(stuff => {
             let choice = stuff[Math.floor(Math.random() * stuff.length)]
             this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
+        racesAPI.getClassInfo(classID).then(stuff => {
+            this.setState({feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
+            })
         })
     };
     buttonRoll = () => {
@@ -128,10 +136,14 @@ class StatRoller extends Component {
         this.rollWis();
         this.rollCha();
         this.rollAlign();
-        this.rollThatClass();
+        const classID = this.rollThatClass();
         racesAPI.getAll().then(stuff => {
             let choice = stuff[Math.floor(Math.random() * stuff.length)]
             this.setState({race: choice.race, language: choice.language, speed: choice.speed})
+        })
+        racesAPI.getClassInfo(classID).then(stuff => {
+            this.setState({feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
+            })
         })
 
     };
@@ -197,75 +209,87 @@ class StatRoller extends Component {
         let rolledClass;
         if (baseRoll === 'Barbarian') {
             rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Bard') {
             rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Cleric') {
             rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Druid') {
             rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Fighter') {
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Monk') {
             rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Paladin') {
             rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Ranger') {
             rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Rogue') {
             rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Sorcerer') {
             rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Warlock') {
             rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
         else if (baseRoll === 'Wizard') {
             rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass
             })
+            return baseRoll;
         }
     }
     rollHP(level) {
@@ -344,6 +368,10 @@ class StatRoller extends Component {
                     hp={this.state.hp}
                     speed={this.state.speed}
                     languages={this.state.language}
+                    feats={this.state.feats}
+                    traits={this.state.traits}
+                    spells={this.state.spells}
+                    cantrips={this.state.cantrips}
                 />
             </div>
         )
