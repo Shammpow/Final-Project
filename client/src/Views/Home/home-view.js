@@ -46,38 +46,109 @@ const Home = props =>
               <li className="hp list-group-item">
                 Hit Points: {props.hp}
               </li>
+              <li className="hp list-group-item">
+                Hit Dice: {props.level}
+              </li>
               <li className="ac list-group-item">
                 Armor Class: {props.baseAC}
               </li>
+            </ul>
+
+            <br />
+
+            <ul className="personStuff list-group">
               <li className="speed list-group-item">
                 Speed: {props.speed}
               </li>
+              <li className="initiative list-group-item">
+                Initiative: {props.initiative}
+              </li>
             </ul>
 
-            <ul className="wallOfText skills/resistances list-group">
-              <li className="skills list-group-item">
-                Skills: {props.todo}.
-                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </li>
-              <li className="resistances list-group-item">
-                Resistances: {props.todo}.
-                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </li>
-            </ul>
+            <br />
 
+            <ul className="personStuff list-group">
+              <li className="resist list-group-item">
+                Resistances: <br />
+                {props.level}
+              </li>
+              <li className="immune list-group-item">
+                Immunities: <br />
+                {props.level}
+              </li>
+              <li className="adv list-group-item">
+                Advantages: <br />
+                {props.level}
+              </li>
+              <li className="disadv list-group-item">
+                Disadvantages: <br />
+                {props.level}
+              </li>
+            </ul>
           </div>
         </div>
+
         <div className="col-sm">
           <ul className="personStuff list-group">
 
-            <li className="initiative list-group-item">
-              Initiative: {props.initiative}
-            </li>
             <li className="proficiency list-group-item">
               Proficiency: {props.prf}
             </li>
-            <li className="hitDice list-group-item">
-              Hit Dice: {props.todo}
+          </ul>
+
+          <br />
+
+          <ul className="personStuff list-group">
+            <li className="acrobatics list-group-item">
+              Acrobatics: {props.level}
+            </li>
+            <li className="arcana list-group-item">
+              Arcana: {props.level}
+            </li>
+            <li className="athletics list-group-item">
+              Athletics: {props.level}
+            </li>
+            <li className="deception list-group-item">
+              Deception: {props.level}
+            </li>
+            <li className="history list-group-item">
+              History: {props.level}
+            </li>
+            <li className="insight list-group-item">
+              Insight: {props.level}
+            </li>
+            <li className="intimidation list-group-item">
+              Intimidation: {props.level}
+            </li>
+            <li className="investigation list-group-item">
+              Investigation: {props.level}
+            </li>
+            <li className="medicine list-group-item">
+              Medicine: {props.level}
+            </li>
+            <li className="nature list-group-item">
+              Nature: {props.level}
+            </li>
+            <li className="perception list-group-item">
+              Perception: {props.level}
+            </li>
+            <li className="performance list-group-item">
+              Performance: {props.level}
+            </li>
+            <li className="persuasion list-group-item">
+              Persuasion: {props.level}
+            </li>
+            <li className="religion list-group-item">
+              Religion: {props.level}
+            </li>
+            <li className="sleight list-group-item">
+              Sleight of Hand: {props.level}
+            </li>
+            <li className="stealth list-group-item">
+              Stealth: {props.level}
+            </li>
+            <li className="survival list-group-item">
+              Survival: {props.level}
             </li>
           </ul>
 
@@ -87,7 +158,7 @@ const Home = props =>
               Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </li>
             <li className="languages list-group-item">
-            Languages: {props.languages}
+              Languages: {props.languages}
             </li>
           </ul>
 

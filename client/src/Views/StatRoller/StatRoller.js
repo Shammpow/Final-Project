@@ -33,7 +33,26 @@ class StatRoller extends Component {
         race: "",
         speed: "",
         languages: "",
-        hp: ""
+        hp: "",
+        acrobatics: "",
+        arcana: "",
+        athletics: "",
+        deception: "",
+        history: "",
+        insight: "",
+        intimidation: "",
+        investigation: "",
+        medicine: "",
+        nature: "",
+        perception: "",
+        performance: "",
+        persuasion: "",
+        religion: "",
+        sleight: "",
+        stealth: "",
+        survival: "",
+        passI: 10 + insight,
+        passP: 10 + perception
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -262,9 +281,9 @@ class StatRoller extends Component {
     }
 
     rollThatRace = () => {
-        const baseRace = ['Dwarf', 'Elf', 'Half-Elf', 'Gnome', 'Halfling', 'Tiefling', 'Half-Orc', 'Drgonborn', 'Human'];
+        const baseRace = ['Dwarf', 'Elf', 'Half-Elf', 'Gnome', 'Halfling', 'Tiefling', 'Half-Orc', 'Dragonborn', 'Human'];
         const baseDwarf = ['Hill Dwarf', 'Mountain Dwarf'];
-        const baseElf = ['High Elft', 'Wood Elft', 'Drow Elf']
+        const baseElf = ['High Elf', 'Wood Elf', 'Drow Elf']
         const baseGnome = ['Forest Gnome', 'Rock Gnome']
         const baseHalfling = ['Lightfoot Halfling', 'Stout Halfling']
         const baseDragonborn = ['Black Dragonborn', 'Blue Dragonborn', 'Brass Dragonborn', 'Bronze Dragonbron', 'Copper Dragonborn', 'Gold Dragonborn', 'Green Dragonborn', 'Red Dragonborn', 'Silver Dragonborn', 'White Dragonborn']
@@ -336,35 +355,10 @@ class StatRoller extends Component {
         return (
             <div className="container roller">
                 <h1>Character Sheet</h1>
-                <span className="reroll">Roll for Stats!
+                <span className="reroll">Reroll!
                     <img id="d20Roller" onClick={() => this.buttonRoll()}
                         src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
                 <div className="stats">
-
-                    <span>Level Selector
-                        <select className="levelchange" defaultValue={this.state.level} value={this.state.level} onChange={this.levelSelect}>
-                            <option value="1" prf="2">1</option>
-                            <option value="2" prf="2">2</option>
-                            <option value="3" prf="2">3</option>
-                            <option value="4" prf="2">4</option>
-                            <option value="5" prf="3">5</option>
-                            <option value="6" prf="3">6</option>
-                            <option value="7" prf="3">7</option>
-                            <option value="8" prf="3">8</option>
-                            <option value="9" prf="4">9</option>
-                            <option value="10" prf="4">10</option>
-                            <option value="11" prf="4">11</option>
-                            <option value="12" prf="4">12</option>
-                            <option value="13" prf="5">13</option>
-                            <option value="14" prf="5">14</option>
-                            <option value="15" prf="5">15</option>
-                            <option value="16" prf="5">16</option>
-                            <option value="17" prf="6">17</option>
-                            <option value="18" prf="6">18</option>
-                            <option value="19" prf="6">19</option>
-                            <option value="20" prf="6">20</option>
-                        </select>
-                    </span>
                     <ul id="classTitle" className="list-group">
                         <li className="list-group-item">
                             Level: {this.state.level} {this.state.align}  {this.state.race} {this.state.class}
@@ -400,7 +394,7 @@ class StatRoller extends Component {
                     speed={this.state.speed}
                     languages={this.state.language}
                     hp={this.state.hp}
-
+                    level={this.state.level}
                 />
             </div>
         )
