@@ -51,8 +51,6 @@ class StatRoller extends Component {
         sleight: "",
         stealth: "",
         survival: "",
-        passI: 10 + insight,
-        passP: 10 + perception
     };
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
