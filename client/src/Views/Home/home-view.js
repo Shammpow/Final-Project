@@ -76,8 +76,23 @@ const Home = props =>
               </li>
             </ul>
 
+            <ul className="wallOfText skills/resistances list-group">
+              <li className="skills list-group-item">
+                Feats: {props.feats}
+                <br></br>
+                Additional Features: {props.traits}
+            </li>
+            <li className="spellStuff list-group-item">
+              Cantrips: {props.cantrips}
+              <br></br>
+              Spells: {props.spells}
+            </li>
+              <li className="resistances list-group-item">
+                Resistances: {props.todo}.
+                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
             <br />
-
+            </ul>
             <ul className="personStuff list-group">
               <li className="resist list-group-item">
                 Resistances: <br />
