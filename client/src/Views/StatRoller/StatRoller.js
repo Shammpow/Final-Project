@@ -51,8 +51,21 @@ class StatRoller extends Component {
         sleight: "",
         stealth: "",
         survival: "",
-        animal: ""
+        animal: "",
+
+        resistance: "",
+        immunities: "",
+        advantage: "",
+        disadvantage: "",
+        size: "",
+        speed: "",
+        racial: "",
+        weapon: "",
+        armor: "",
+        tools: "",
+        vehicles: ""
     };
+    
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
         let postMod = result - 10;
@@ -270,8 +283,8 @@ class StatRoller extends Component {
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass,
-                strsave: finalCon,
-                consave: finalStr
+                strsave: finalStr,
+                consave: finalCon
 
             })
         }
