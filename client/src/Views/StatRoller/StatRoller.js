@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Home from '../Home';
 import './StatRoller.scss';
+import racesAPI from '../../Data/races-api.js'
 
 class StatRoller extends Component {
     state = {
@@ -33,7 +34,6 @@ class StatRoller extends Component {
         race: "",
         speed: "",
         languages: "",
-        hp: "",
         feats: "",
         traits: "",
         spells: "",
@@ -63,7 +63,6 @@ class StatRoller extends Component {
         advantage: "",
         disadvantage: "",
         size: "",
-        speed: "",
         racial: "",
         weapon: "",
         armor: "",
@@ -260,7 +259,7 @@ class StatRoller extends Component {
             let finalStr = preStr + this.state.prf
             let finalCon = preCon + this.state.prf            
             rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon
@@ -271,7 +270,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalCha = preCha + this.state.prf            
             rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 dexsave: finalDex,
                 chasave: finalCha
@@ -282,7 +281,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf;
             let finalCha = preCha + this.state.prf            
             rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
@@ -293,7 +292,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalInt = preInt + this.state.prf            
             rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 wissave: finalWis,
                 intsave: finalInt
@@ -305,7 +304,7 @@ class StatRoller extends Component {
             let finalStr = preStr + this.state.prf
             let finalCon = preCon + this.state.prf            
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon
@@ -317,7 +316,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalStr = preStr + this.state.prf            
             rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 strsave: finalDex,
                 dexsave: finalStr
@@ -329,7 +328,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalCha = preCha + this.state.prf            
             rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
@@ -341,7 +340,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalStr = preStr + this.state.prf            
             rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 strsave: finalDex,
                 dexsave: finalStr
@@ -353,7 +352,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalInt = preInt + this.state.prf            
             rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 dexsave: finalDex,
                 intsave: finalInt
@@ -365,7 +364,7 @@ class StatRoller extends Component {
             let finalCon = preCon + this.state.prf
             let finalCha = preCha + this.state.prf            
             rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 chasave: finalCha,
                 consave: finalCon
@@ -377,7 +376,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalCha = preCha + this.state.prf            
             rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
@@ -388,7 +387,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalInt = preInt + this.state.prf            
             rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
-            return this.setState({
+            this.setState({
                 class: rolledClass,
                 intsave: finalInt,
                 wissave: finalWis
@@ -509,7 +508,6 @@ class StatRoller extends Component {
                     prf={this.state.prf}
                     align={this.state.align}
                     rolledClass={this.state.class}
-<<<<<<< Temporary merge branch 1
                     speed={this.state.speed}
                     languages={this.state.language}
                     hp={this.state.hp}

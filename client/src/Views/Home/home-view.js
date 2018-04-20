@@ -92,7 +92,7 @@ const Home = props =>
                 Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </li>
             <br />
-
+            </ul>
             <ul className="personStuff list-group">
               <li className="resist list-group-item">
                 Resistances: <br />
