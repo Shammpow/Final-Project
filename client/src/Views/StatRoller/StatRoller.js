@@ -218,7 +218,6 @@ class StatRoller extends Component {
 
         let baseRoll = baseArr[Math.floor(Math.random() * baseArr.length)];
         let rolledClass;
-        let preHP = this.rollCon();
         let preStr = this.rollStr();
         let preDex = this.rollDex();
         let preCon = this.rollCon();
@@ -229,7 +228,7 @@ class StatRoller extends Component {
             let finalStr = preStr + this.state.prf
             let finalCon = preCon + this.state.prf
             rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
-            let classHP = 12 + preHP
+            let classHP = 12 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -242,7 +241,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalCha = preCha + this.state.prf
             rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -255,7 +254,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf;
             let finalCha = preCha + this.state.prf
             rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -268,7 +267,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalInt = preInt + this.state.prf
             rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -282,7 +281,7 @@ class StatRoller extends Component {
             let finalStr = preStr + this.state.prf
             let finalCon = preCon + this.state.prf
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preHP
+            let classHP = 10 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -296,7 +295,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalStr = preStr + this.state.prf
             rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -310,7 +309,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalCha = preCha + this.state.prf
             rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preHP
+            let classHP = 10 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -324,9 +323,9 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalStr = preStr + this.state.prf
             rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preHP
+            let classHP = 10 + preCon
             this.setState({
-                hp: 10 + preHP,
+                hp: classHP,
                 class: rolledClass,
                 strsave: finalDex,
                 dexsave: finalStr
@@ -338,7 +337,7 @@ class StatRoller extends Component {
             let finalDex = preDex + this.state.prf
             let finalInt = preInt + this.state.prf
             rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -353,7 +352,7 @@ class StatRoller extends Component {
             let finalCha = preCha + this.state.prf
             rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
             if (rolledClass === "Wild Sorcerer") {
-                let classHP = 6 + preHP
+                let classHP = 6 + preCon
                 this.setState({
                     class: rolledClass,
                     hp: classHP,
@@ -364,7 +363,7 @@ class StatRoller extends Component {
             }
             else {
                 let rollSorcDrag = sorcDrags[Math.floor(Math.random() * sorcDrags.length)] + " " + baseRoll;
-                let classHP = 6 + preHP + this.state.level
+                let classHP = 6 + preCon + this.state.level
                 this.setState({
                     class: rollSorcDrag,
                     hp: classHP,
@@ -378,7 +377,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalCha = preCha + this.state.prf
             rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
-            let classHP = 8 + preHP
+            let classHP = 8 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -391,7 +390,7 @@ class StatRoller extends Component {
             let finalWis = preWis + this.state.prf
             let finalInt = preInt + this.state.prf
             rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
-            let classHP = 6 + preHP
+            let classHP = 6 + preCon
             this.setState({
                 hp: classHP,
                 class: rolledClass,
