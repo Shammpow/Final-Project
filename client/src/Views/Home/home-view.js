@@ -39,6 +39,17 @@ const Home = props =>
             </li>
           </ul>
 
+          <br />
+
+          <ul className="individualStats list-group">
+            <li className="passI list-group-item">
+              Passive Insight: {10 + props.insight}
+            </li>
+            <li className="passP list-group-item">
+              Passive Perception: {10 + props.perception}
+            </li>
+          </ul>
+
         </div>
         <div className="col-sm">
           <div className="container">
@@ -100,55 +111,59 @@ const Home = props =>
 
           <ul className="personStuff list-group">
             <li className="acrobatics list-group-item">
-              Acrobatics: {props.level}
+              Acrobatics: {props.acrobatics}
             </li>
+            <li className="animal list-group-item">
+              Animal Handling: {props.animal}
+            </li>
+
             <li className="arcana list-group-item">
-              Arcana: {props.level}
+              Arcana: {props.arcana}
             </li>
             <li className="athletics list-group-item">
-              Athletics: {props.level}
+              Athletics: {props.athletics}
             </li>
             <li className="deception list-group-item">
-              Deception: {props.level}
+              Deception: {props.deception}
             </li>
             <li className="history list-group-item">
-              History: {props.level}
+              History: {props.history}
             </li>
             <li className="insight list-group-item">
-              Insight: {props.level}
+              Insight: {props.insight}
             </li>
             <li className="intimidation list-group-item">
-              Intimidation: {props.level}
+              Intimidation: {props.intimidation}
             </li>
             <li className="investigation list-group-item">
-              Investigation: {props.level}
+              Investigation: {props.investigation}
             </li>
             <li className="medicine list-group-item">
-              Medicine: {props.level}
+              Medicine: {props.medicine}
             </li>
             <li className="nature list-group-item">
-              Nature: {props.level}
+              Nature: {props.nature}
             </li>
             <li className="perception list-group-item">
-              Perception: {props.level}
+              Perception: {props.perception}
             </li>
             <li className="performance list-group-item">
-              Performance: {props.level}
+              Performance: {props.performance}
             </li>
             <li className="persuasion list-group-item">
-              Persuasion: {props.level}
+              Persuasion: {props.persuasion}
             </li>
             <li className="religion list-group-item">
-              Religion: {props.level}
+              Religion: {props.religion}
             </li>
             <li className="sleight list-group-item">
-              Sleight of Hand: {props.level}
+              Sleight of Hand: {props.sleight}
             </li>
             <li className="stealth list-group-item">
-              Stealth: {props.level}
+              Stealth: {props.stealth}
             </li>
             <li className="survival list-group-item">
-              Survival: {props.level}
+              Survival: {props.survival}
             </li>
           </ul>
 
