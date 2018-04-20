@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import ClassRoller from '../ClassRoller';
-import Home from '../Home'
-import './StatRoller.scss'
+import Home from '../Home';
+import './StatRoller.scss';
 
 class StatRoller extends Component {
     state = {
@@ -30,6 +29,10 @@ class StatRoller extends Component {
         align: "",
         initiative: "",
         class: "",
+        placeholder: "TODO",
+        race: "",
+        speed: "",
+        languages: "",
         hp: ""
     };
     rollStr = event => {
@@ -111,6 +114,7 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        this.rollThatRace();
     };
     buttonRoll = () => {
         this.rollStr();
@@ -121,6 +125,7 @@ class StatRoller extends Component {
         this.rollCha();
         this.rollAlign();
         this.rollThatClass();
+        this.rollThatRace();
     };
     determinePRF(level) {
         let prf;
@@ -177,84 +182,148 @@ class StatRoller extends Component {
         const rangSubs = ['Hunter', 'Beast Master']
         const rogSubs = ['Thief', 'Assassin', 'Arcane Trickster']
         const sorcSubs = ['Wild', 'Black Dragon', 'Blue Dragon', 'Brass Dragon', 'Bronze Dragon', 'Copper Dragon', 'Gold Dragon', 'Green Dragon', 'Red Dragon', 'Silver Dragon', 'White Dragon']
-        const warlSubs = ['Fey Blade-Pact', 'Fey Chain-Pact', 'Fey Tome-Pact', 'Old One Blade-Pact', 'Old One Chain-Pact', 'Old Tome-Pact', 'Infernal Blade-Pact', 'Infernal Chain-Pact', 'Infernal Tome-Pact']
+        const warlSubs = ['Fey Warlock (Blade Pact)', 'Fey Warlock (Chain Pact)', 'Fey Warlock (Tome Pact)', 'Old One Warlock (Blade Pact)', 'Old One Warlock (Chain Pact)', 'Old One Warlock (Tome Pact)', 'Infernal Warlock (Blade Pact)', 'Infernal Warlock (Chain Pact)', 'Inernal Warlock (Tome Pact)']
         const wizSubs = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation']
 
         let baseRoll = baseArr[Math.floor(Math.random() * baseArr.length)];
         let rolledClass;
-        if (baseRoll == 'Barbarian') {
+        if (baseRoll === 'Barbarian') {
             rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Bard') {
+        else if (baseRoll === 'Bard') {
             rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Cleric') {
+        else if (baseRoll === 'Cleric') {
             rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Druid') {
+        else if (baseRoll === 'Druid') {
             rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Fighter') {
+        else if (baseRoll === 'Fighter') {
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Monk') {
+        else if (baseRoll === 'Monk') {
             rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Paladin') {
+        else if (baseRoll === 'Paladin') {
             rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Ranger') {
+        else if (baseRoll === 'Ranger') {
             rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Rogue') {
+        else if (baseRoll === 'Rogue') {
             rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Sorcerer') {
+        else if (baseRoll === 'Sorcerer') {
             rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Warlock') {
-            rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)] + " " + baseRoll;
+        else if (baseRoll === 'Warlock') {
+            rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
             return this.setState({
                 class: rolledClass
             })
         }
-        else if (baseRoll == 'Wizard') {
+        else if (baseRoll === 'Wizard') {
             rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
             return this.setState({
                 class: rolledClass
             })
         }
     }
+
+    rollThatRace = () => {
+        const baseRace = ['Dwarf', 'Elf', 'Half-Elf', 'Gnome', 'Halfling', 'Tiefling', 'Half-Orc', 'Drgonborn', 'Human'];
+        const baseDwarf = ['Hill Dwarf', 'Mountain Dwarf'];
+        const baseElf = ['High Elft', 'Wood Elft', 'Drow Elf']
+        const baseGnome = ['Forest Gnome', 'Rock Gnome']
+        const baseHalfling = ['Lightfoot Halfling', 'Stout Halfling']
+        const baseDragonborn = ['Black Dragonborn', 'Blue Dragonborn', 'Brass Dragonborn', 'Bronze Dragonbron', 'Copper Dragonborn', 'Gold Dragonborn', 'Green Dragonborn', 'Red Dragonborn', 'Silver Dragonborn', 'White Dragonborn']
+
+        let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
+        let rolledRace;
+        if (randRace === 'Dwarf') {
+            rolledRace = baseDwarf[Math.floor(Math.random() * baseDwarf.length)];
+            return this.setState({
+                race: rolledRace
+            })
+        }
+        else if (randRace === 'Elf') {
+            rolledRace = baseElf[Math.floor(Math.random() * baseElf.length)];
+            return this.setState({
+                race: rolledRace
+            })
+        }
+        else if (randRace === 'Gnome') {
+            rolledRace = baseGnome[Math.floor(Math.random() * baseGnome.length)];
+            return this.setState({
+                race: rolledRace
+            })
+        }
+        else if (randRace === 'Halfling') {
+            rolledRace = baseHalfling[Math.floor(Math.random() * baseHalfling.length)];
+            return this.setState({
+                race: rolledRace
+            })
+        }
+        else if (randRace === 'Dragonborn') {
+            rolledRace = baseDragonborn[Math.floor(Math.random() * baseDragonborn.length)];
+            return this.setState({
+                race: rolledRace
+            })
+        }
+        else if (randRace === 'Human') {
+            return this.setState({
+                race: randRace
+            })
+        }
+        else if (randRace === 'Half-Elf') {
+            return this.setState({
+                race: randRace
+            })
+        }
+        else if (randRace === 'Half-Orc') {
+            return this.setState({
+                race: randRace
+            })
+        }
+        else if (randRace === 'Tiefling') {
+            return this.setState({
+                race: randRace
+            })
+        }
+    }
+
+
     rollHP(level) {
         let hitpoints = 0;
         for (let i = 0; i < level - 1; i++) {
@@ -267,8 +336,9 @@ class StatRoller extends Component {
         return (
             <div className="container roller">
                 <h1>Character Sheet</h1>
-                <span onClick={() => this.buttonRoll()} className="reroll">Roll for Stats!
-                    <img id="d20Roller" src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
+                <span className="reroll">Roll for Stats!
+                    <img id="d20Roller" onClick={() => this.buttonRoll()}
+                        src="/public/images/d20-roller.png" alt="d20 Roller"></img></span>
                 <div className="stats">
 
                     <span>Level Selector
@@ -295,6 +365,11 @@ class StatRoller extends Component {
                             <option value="20" prf="6">20</option>
                         </select>
                     </span>
+                    <ul id="classTitle" className="list-group">
+                        <li className="list-group-item">
+                            Level: {this.state.level} {this.state.align}  {this.state.race} {this.state.class}
+                        </li>
+                    </ul>
                 </div>
 
                 <Home
@@ -322,7 +397,10 @@ class StatRoller extends Component {
                     prf={this.state.prf}
                     align={this.state.align}
                     rolledClass={this.state.class}
+                    speed={this.state.speed}
+                    languages={this.state.language}
                     hp={this.state.hp}
+
                 />
             </div>
         )

@@ -50,10 +50,8 @@ const Home = props =>
                 Armor Class: {props.baseAC}
               </li>
               <li className="speed list-group-item">
-                Speed: {props.todo}
+                Speed: {props.speed}
               </li>
-              <li className="rolledClass">
-                Class: {props.rolledClass}</li>
             </ul>
 
             <ul className="wallOfText skills/resistances list-group">
@@ -88,10 +86,8 @@ const Home = props =>
               Background: {props.todo}.
               Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </li>
-
-            <li className="tools list-group-item">
-              Alignment: {props.todo}.
-              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <li className="languages list-group-item">
+            Languages: {props.languages}
             </li>
           </ul>
 
