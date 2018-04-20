@@ -401,7 +401,6 @@ class StatRoller extends Component {
             return classHP
         }
     }
-
     rollThatRace = () => {
         const baseRace = ['Dwarf', 'Elf', 'Half-Elf', 'Gnome', 'Halfling', 'Tiefling', 'Half-Orc', 'Dragonborn', 'Human'];
         const baseDwarf = ['Hill Dwarf', 'Mountain Dwarf'];
@@ -519,7 +518,7 @@ class StatRoller extends Component {
                     align={this.state.align}
                     rolledClass={this.state.class}
                     speed={this.state.speed}
-                    languages={this.state.language}
+                    languages={this.state.languages}
                     hp={this.state.hp}
                     level={this.state.level}
                     athletics={this.state.athletics}
