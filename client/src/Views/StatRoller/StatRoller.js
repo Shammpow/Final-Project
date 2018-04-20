@@ -170,7 +170,7 @@ class StatRoller extends Component {
             let choice = stuff[Math.floor(Math.random() * stuff.length)]
             this.setState({race: choice.race, language: choice.language, speed: choice.speed})
         })
-        racesAPI.getClassInfo(classID).then(stuff => {
+        racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             this.setState({feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
             })
         })
@@ -182,7 +182,7 @@ class StatRoller extends Component {
             let choice = stuff[Math.floor(Math.random() * stuff.length)]
             this.setState({race: choice.race, language: choice.language, speed: choice.speed})
         })
-        racesAPI.getClassInfo(classID).then(stuff => {
+        racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             this.setState({feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
             })
         })
@@ -263,7 +263,7 @@ class StatRoller extends Component {
                 strsave: finalStr,
                 consave: finalCon,
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Bard') {
             let finalDex = preDex + this.state.prf
@@ -274,7 +274,7 @@ class StatRoller extends Component {
                 dexsave: finalDex,
                 chasave: finalCha
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Cleric') {
             let finalWis = preWis + this.state.prf;
@@ -285,7 +285,7 @@ class StatRoller extends Component {
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Druid') {
             let finalWis = preWis + this.state.prf
@@ -297,7 +297,7 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Fighter') {
             let finalStr = preStr + this.state.prf
@@ -309,7 +309,7 @@ class StatRoller extends Component {
                 consave: finalCon
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Monk') {
             let finalDex = preDex + this.state.prf
@@ -321,7 +321,7 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Paladin') {
             let finalWis = preWis + this.state.prf
@@ -333,7 +333,7 @@ class StatRoller extends Component {
                 chasave: finalCha
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Ranger') {
             let finalDex = preDex + this.state.prf
@@ -345,7 +345,7 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Rogue') {
             let finalDex = preDex + this.state.prf
@@ -357,7 +357,7 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Sorcerer') {
             let finalCon = preCon + this.state.prf
@@ -369,7 +369,7 @@ class StatRoller extends Component {
                 consave: finalCon
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Warlock') {
             let finalWis = preWis + this.state.prf
@@ -380,7 +380,7 @@ class StatRoller extends Component {
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return baseRoll;
+            return {baseRoll};
         }
         else if (baseRoll === 'Wizard') {
             let finalWis = preWis + this.state.prf
@@ -392,7 +392,7 @@ class StatRoller extends Component {
                 wissave: finalWis
 
             })
-            return baseRoll;
+            return {baseRoll};
         }
     }
 
