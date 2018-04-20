@@ -57,7 +57,6 @@ class StatRoller extends Component {
         stealth: "",
         survival: "",
         animal: "",
-
         resistance: "",
         immunities: "",
         advantage: "",
@@ -262,7 +261,7 @@ class StatRoller extends Component {
             this.setState({
                 class: rolledClass,
                 strsave: finalStr,
-                consave: finalCon
+                consave: finalCon,
             })
             return baseRoll;
         }
