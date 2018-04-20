@@ -478,25 +478,6 @@ class StatRoller extends Component {
 
         return hitpoints;
     }
-    componentDidMount = () => {
-        // consolidate
-        this.rollStr();
-        this.rollDex();
-        this.rollInt();
-        this.rollWis();
-        this.rollCha();
-        this.rollAlign();
-        this.rollThatRace();
-    };
-    buttonRoll = () => {
-        this.rollStr();
-        this.rollDex();
-        this.rollInt();
-        this.rollWis();
-        this.rollCha();
-        this.rollAlign();
-        this.rollThatRace();
-    };
     render() {
         return (
             <div className="container roller">
