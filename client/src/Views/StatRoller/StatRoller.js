@@ -58,14 +58,20 @@ class StatRoller extends Component {
         advantage: "",
         disadvantage: "",
         size: "",
-        speed: "",
         racial: "",
-        weapon: "",
+        weapons: "",
         armor: "",
         tools: "",
-        vehicles: ""
+        vehicles: "",
+
+        extCantrip: "",
+        extSpell1: "",
+        extSpell2: "",
+        extmod: "",
+
+        profSkills: ""
     };
-    
+
     rollStr = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
         let postMod = result - 10;
@@ -166,10 +172,31 @@ class StatRoller extends Component {
         this.rollThatRace();
     };
     buttonRoll = () => {
+        this.grandReset();
         this.rollAlign();
         this.rollThatClass();
         this.rollThatRace();
     };
+    grandReset = () => {
+        this.setState({
+            resistance: "",
+            advantage: "",
+            languages: "",
+            weapons: "",
+            armor: "",
+            tools: "",
+            vehicles: "",
+            racial: "",
+            disadvantage: "",
+            immuneities: "",
+            extmod: "",
+            extCantrip: "",
+            extSpell: "",
+            extSpell2: "",
+            immunities: "",
+            profSkills: ""
+        })
+    }
     determinePRF(level) {
         let prf;
         if (level < 5) {
@@ -416,30 +443,59 @@ class StatRoller extends Component {
     }
 
     rollThatRace = () => {
-        const baseRace = ['Dwarf', 'Elf', 'Half-Elf', 'Gnome', 'Halfling', 'Tiefling', 'Half-Orc', 'Dragonborn', 'Human'];
+        const baseRace = ['Dwarf', 'Elf', 'HalfElf', 'Gnome', 'Halfling', 'Tiefling', 'HalfOrc', 'Dragonborn', 'Human'];
         const baseDwarf = ['Hill Dwarf', 'Mountain Dwarf'];
         const baseElf = ['High Elf', 'Wood Elf', 'Drow Elf']
         const baseGnome = ['Forest Gnome', 'Rock Gnome']
         const baseHalfling = ['Lightfoot Halfling', 'Stout Halfling']
         const baseDragonborn = ['Black Dragonborn', 'Blue Dragonborn', 'Brass Dragonborn', 'Bronze Dragonbron', 'Copper Dragonborn', 'Gold Dragonborn', 'Green Dragonborn', 'Red Dragonborn', 'Silver Dragonborn', 'White Dragonborn']
 
+        let choiceL;
+        let choiceH;
+        let rand1;
+        let rand2;
+        let pickL;
+        let pickS;
+        let pickH;
+
         let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
         let rolledRace;
         let rolledHP = this.rollThatClass();
+        
         if (randRace === 'Dwarf') {
             rolledRace = baseDwarf[Math.floor(Math.random() * baseDwarf.length)]
             if (rolledRace === 'Hill Dwarf') {
+                const pick = ["Mason's Tools", "Brewer's Tools", "Smith's Tools"];
+                let select = pick[Math.floor(Math.random() * pick.length)];
                 return this.setState({
                     race: rolledRace,
-                    hp: rolledHP + 1
+                    hp: rolledHP + 1,
+                    resistance: this.state.resistance + "Poison ",
+                    advantage: this.state.advantage + "Saving Throws vs Poison ",
+                    languages: this.state.languages + "Common " + "Dwarven ",
+                    speed: 25,
+                    size: "Medium",
+                    weapons: this.state.weapons + "Battleaxe " + "Handaxe " + "Light Hammer " + "Warhammer ",
+                    racial: this.state.racial + "Darkvision (60ft) " + "Stonecunning ",
+                    tools: this.state.tools + select
                 })
             }
-            else {
+            if (rolledRace === 'Mountain Dwarf') {
+                const pick = ["Mason's Tools", "Brewer's Tools", "Smith's Tools"];
+                let select = pick[Math.floor(Math.random() * pick.length)];
                 return this.setState({
-                    race: rolledRace
+                    race: rolledRace,
+                    resistance: this.state.resistance + "Poison ",
+                    advantage: this.state.advantage + "Saving Throws vs Poison ",
+                    languages: this.state.languages + "Common " + "Dwarven ",
+                    speed: 25,
+                    size: "Medium",
+                    weapons: this.state.weapons + "Battleaxe " + "Handaxe " + "Light Hammer " + "Warhammer ",
+                    racial: this.state.racial + "Darkvision (60ft) " + "Stonecunning ",
+                    tools: this.state.tools + select,
+                    armor: this.state.armor + "Light Armor " + "Medium Armor "
                 })
             }
-
         }
         else if (randRace === 'Elf') {
             rolledRace = baseElf[Math.floor(Math.random() * baseElf.length)];
@@ -466,23 +522,66 @@ class StatRoller extends Component {
             })
         }
         else if (randRace === 'Human') {
+            const pickH = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc", "Elvish "];
+            choiceH = pickH[Math.floor(Math.random() * pickH.length)];
             return this.setState({
-                race: randRace
+                race: randRace,
+                size: "Medium",
+                speed: 30,
+                languages: this.state.languages + "Common " + choiceH,
             })
         }
-        else if (randRace === 'Half-Elf') {
+        else if (randRace === 'HalfElf') {
+            pickL = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"];
+            choiceL = pickL[Math.floor(Math.random() * pickL.length)];
+            pickS = ["Acrobatics", "Animal", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"];
+            rand1 = pickS[Math.floor(Math.random() * pickS.length)];
+            rand2 = pickS[Math.floor(Math.random() * pickS.length)];
+            if (rand1 === rand2) {
+                rand2 = pickS[Math.floor(Math.random() * pickS.length)];
+            }
             return this.setState({
-                race: randRace
+                race: "Half-Elf",
+                advantage: this.state.advantage + "Charm ",
+                immunities: this.state.immunities + "Sleep ",
+                racial: this.state.racial + "Darkvision (60ft) ",
+                speed: 30,
+                size: "Medium",
+                languages: this.state.languages + "Common " + "Elvish " + choiceL,
+                profSkills: this.state.profSkills + rand1 + " " + rand2
             })
         }
-        else if (randRace === 'Half-Orc') {
+        else if (randRace === 'HalfOrc') {
             return this.setState({
-                race: randRace
+                race: "Half-Orc",
+                languages: this.state.languages + "Common " + "Orc ",
+                speed: 30,
+                size: "Medium",
+                racial: this.state.racial + "Darkvision (60ft) " + "Savage Attacks, Relentless Endurance ",
+                profSkills: this.state.profSkills + "Intimidation "
             })
         }
         else if (randRace === 'Tiefling') {
+            let spell1;
+            let spell2;
+            if (this.state.level > 2) {
+                spell1 = "Hellish Rebuke (as if from a 2nd Level Slot) 1 / Long Rest";
+            }
+            if (this.state.level > 4) {
+                spell1 = "Hellish Rebuke (2nd Level Spell) 1 / Long Rest";
+                spell2 = "Darkness (2nd Level Spell) 1 / Long Rest";
+            }
             return this.setState({
-                race: randRace
+                race: randRace,
+                resistance: this.state.resistance + "Fire ",
+                languages: this.state.languages + "Common " + "Infernal ",
+                speed: 30,
+                size: "Medium",
+                racial: this.state.racial + "Darkvision (60ft) ",
+                extCantrip: this.state.extCantrip + "Thaumaturgy ",
+                extSpell1: spell1,
+                extSpell2: spell2,
+                extmod: "CHA"
             })
         }
     }
@@ -532,7 +631,7 @@ class StatRoller extends Component {
                     align={this.state.align}
                     rolledClass={this.state.class}
                     speed={this.state.speed}
-                    languages={this.state.language}
+                    languages={this.state.languages}
                     hp={this.state.hp}
                     level={this.state.level}
                     athletics={this.state.athletics}
@@ -553,6 +652,20 @@ class StatRoller extends Component {
                     medicine={this.state.medicine}
                     perception={this.state.perception}
                     survival={this.state.survival}
+                    resistance={this.state.resistance}
+                    advantage={this.state.advantage}
+                    size={this.state.size}
+                    weapons={this.state.weapons}
+                    armor={this.state.armor}
+                    tools={this.state.tools}
+                    vehicles={this.state.vehicles}
+                    racial={this.state.racial}
+                    extCantrip={this.state.extCantrip}
+                    extSpell1={this.state.extSpell1}
+                    extSpell2={this.state.extSpell2}
+                    extmod={this.state.extmod}
+                    profSkills={this.state.profSkills}
+                    immunities={this.state.immunities}
                 />
             </div>
         )
