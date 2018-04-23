@@ -1,3 +1,5 @@
+// @flow
+import { random } from 'lodash'
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Home from '../Home';
@@ -71,7 +73,7 @@ class StatRoller extends Component {
     };
 
     rollStr = event => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1, 6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -84,7 +86,7 @@ class StatRoller extends Component {
         return { result, ultMod }
     };
     rollDex = event => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1,6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -102,7 +104,7 @@ class StatRoller extends Component {
         return { result, ultMod }
     };
     rollCon = () => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1,6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -114,7 +116,7 @@ class StatRoller extends Component {
         return { result, ultMod }
     };
     rollInt = event => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1,6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -131,7 +133,7 @@ class StatRoller extends Component {
         return { result, ultMod }
     };
     rollWis = event => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1,6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -148,7 +150,7 @@ class StatRoller extends Component {
         return { result, ultMod }
     };
     rollCha = event => {
-        let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+        let result = random(1,6) + random(1,6) + random(1,6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
