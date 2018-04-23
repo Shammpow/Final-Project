@@ -182,6 +182,8 @@ class StatRoller extends Component {
         const classID = this.rollThatRace();
 
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
+            console.log(classID.baseRoll)
+            console.log(stuff)
             this.setState({
                 feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
             })
@@ -192,6 +194,8 @@ class StatRoller extends Component {
         this.rollAlign();
         const classID = this.rollThatRace();
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
+            console.log(stuff)
+            console.log(classID.baseRoll)
             this.setState({
                 feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
             })
@@ -913,6 +917,10 @@ class StatRoller extends Component {
                     breath={this.state.breath}
                     breathDC={this.state.breathDC}
                     breathST={this.state.breathST}
+                    feats={this.state.feats}
+                    traits={this.state.traits}
+                    cantrips={this.state.cantrips}
+                    spells={this.state.spells}
                 />
             </div>
         )
