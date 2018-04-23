@@ -299,7 +299,7 @@ class StatRoller extends Component {
                 strsave: finalStr,
                 consave: finalCon,
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Bard') {
             let finalDex = preDex + this.state.prf
@@ -312,7 +312,7 @@ class StatRoller extends Component {
                 dexsave: finalDex,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Cleric') {
             let finalWis = preWis + this.state.prf;
@@ -325,7 +325,7 @@ class StatRoller extends Component {
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Druid') {
             let finalWis = preWis + this.state.prf
@@ -339,7 +339,7 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Fighter') {
             let finalStr = preStr + this.state.prf
@@ -352,7 +352,7 @@ class StatRoller extends Component {
                 strsave: finalStr,
                 consave: finalCon
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Monk') {
             let finalDex = preDex + this.state.prf
@@ -366,7 +366,7 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Paladin') {
             let finalWis = preWis + this.state.prf
@@ -380,7 +380,7 @@ class StatRoller extends Component {
                 chasave: finalCha
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Ranger') {
             let finalDex = preDex + this.state.prf
@@ -394,7 +394,7 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Rogue') {
             let finalDex = preDex + this.state.prf
@@ -408,7 +408,7 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Sorcerer') {
             let finalCon = preCon + this.state.prf
@@ -422,7 +422,7 @@ class StatRoller extends Component {
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll }
+                return { classHP, baseRoll, preCon }
             }
             else {
                 let rollSorcDrag = sample(sorcDrags) + " " + baseRoll;
@@ -433,7 +433,7 @@ class StatRoller extends Component {
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll }
+                return { classHP, baseRoll, preCon }
             }
         }
         else if (baseRoll === 'Warlock') {
@@ -447,7 +447,7 @@ class StatRoller extends Component {
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
         else if (baseRoll === 'Wizard') {
             let finalWis = preWis + this.state.prf
@@ -461,7 +461,7 @@ class StatRoller extends Component {
                 wissave: finalWis
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preCon }
         }
     }
     rollThatRace = () => {
