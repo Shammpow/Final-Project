@@ -69,7 +69,7 @@ const Home = props =>
                 Hit Dice: {props.level}
               </li>
               <li className="ac list-group-item">
-                Armor Class: {props.baseAC}
+                Base AC: {props.baseAC}
               </li>
             </ul>
 
@@ -109,7 +109,7 @@ const Home = props =>
               </li>
               <li className="disadv list-group-item">
                 Disadvantages: <br />
-                {props.level}
+                {props.disadvantage}
               </li>
             </ul>
           </div>
@@ -160,6 +160,16 @@ const Home = props =>
               <div> {props.extmod} </div>
             </li>
           </ul>
+
+          <br />
+
+          <ul className="personStuff list-group">
+            <li className="breath list-group-item">
+              <div><strong>Breath Weapon</strong></div>
+              <div> {props.breath} <br /> {props.breathDC} {props.breathST}</div>
+            </li>
+          </ul>
+          
 
           <br />
 

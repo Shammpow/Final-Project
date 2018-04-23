@@ -69,7 +69,12 @@ class StatRoller extends Component {
         extSpell2: "",
         extmod: "",
 
-        profSkills: ""
+        profSkills: "",
+
+        breath: "",
+        breathDC: "",
+        breathST: ""
+
     };
 
     rollStr = event => {
@@ -194,7 +199,10 @@ class StatRoller extends Component {
             extSpell: "",
             extSpell2: "",
             immunities: "",
-            profSkills: ""
+            profSkills: "",
+            breath: "",
+            breathDC: "",
+            breathST: ""
         })
     }
     determinePRF(level) {
@@ -327,7 +335,6 @@ class StatRoller extends Component {
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon
-
             })
             return classHP
         }
@@ -461,7 +468,7 @@ class StatRoller extends Component {
         let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
         let rolledRace;
         let rolledHP = this.rollThatClass();
-        
+
         if (randRace === 'Dwarf') {
             rolledRace = baseDwarf[Math.floor(Math.random() * baseDwarf.length)]
             if (rolledRace === 'Hill Dwarf') {
@@ -486,8 +493,8 @@ class StatRoller extends Component {
                 return this.setState({
                     race: rolledRace,
                     resistance: "Poison",
-                    advantage: "Saving Throws vs Poison,",
-                    languages: "Common, Dwarven ",
+                    advantage: "Saving Throws vs Poison",
+                    languages: "Common, Dwarven",
                     speed: 25,
                     size: "Medium",
                     weapons: "Battleaxe, Handaxe, Light Hammer, Warhammer",
@@ -499,27 +506,241 @@ class StatRoller extends Component {
         }
         else if (randRace === 'Elf') {
             rolledRace = baseElf[Math.floor(Math.random() * baseElf.length)];
+            if (rolledRace === 'High Elf') {
+                const pickL = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"];
+                let choiceL = pickL[Math.floor(Math.random() * pickL.length)];
+                const pickE = ["Acid Splash", "Blade Ward", "Chill Touch", "Dancing Lights", "Fire Bolt", "Friends", "Light", "Mage Hand", "Mending", "Minor Illusion", "Poison Spray", "Prestidigitation", "Ray of Frost", "True Strike"];
+                let choiceE = pickE[Math.floor(Math.random() * pickE.length)]
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Saving Throws vs Charm",
+                    immunities: "Sleep",
+                    languages: "Common, Elvish, " + choiceL,
+                    speed: 30,
+                    size: "Medium",
+                    racial: "Darkvision (60ft), Trance",
+                    profSkills: "Perception",
+                    weapons: "Longsword, Shortsword, Longbow, Shortbow",
+                    extmod: "INT",
+                    extCantrip: choiceE,
+                })
+            }
+            if (rolledRace === 'Wood Elf') {
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Saving Throws vs Charm",
+                    immunities: "Sleep",
+                    languages: "Common, Elvish",
+                    speed: 35,
+                    size: "Medium",
+                    racial: "Darkvision (60ft), Trance, Mark of the Wild",
+                    profSkills: "Perception",
+                    weapons: "Longsword, Shortsword, Longbow, Shortbow",
+                })
+            }
+            if (rolledRace === 'Drow Elf') {
+                let spell1;
+                let spell2;
+                if (this.state.level > 2) {
+                    spell1 = "Faerie Fire: 1/Long Rest";
+                }
+                if (this.state.level > 4) {
+                    spell1 = "Faerie Fire: 1/Long Rest";
+                    spell2 = "Darkness: 1/Long Rest";
+                }
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Saving Throws vs Charm",
+                    immunities: "Sleep",
+                    languages: "Common, Elvish",
+                    speed: 30,
+                    size: "Medium",
+                    racial: "Darkvision (120ft), Trance",
+                    profSkills: "Perception",
+                    weapons: "Rapiers, Shortswords, Hand Crossbows",
+                    disadvantage: "While within Sunlight, you have Disadvantage on Attacks Rolls and Perception Checks which rely on Sight",
+                    extmod: "CHA",
+                    extCantrip: "Dancing Lights",
+                    extSpell1: spell1,
+                    extSpell2: spell2,
+                })
+            }
             return this.setState({
                 race: rolledRace
             })
         }
         else if (randRace === 'Gnome') {
             rolledRace = baseGnome[Math.floor(Math.random() * baseGnome.length)];
-            return this.setState({
-                race: rolledRace
-            })
+            if (rolledRace === 'Forest Gnome') {
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Intelligence, Wisdom, and Charisma Saving Throws vs Magic",
+                    languages: "Common, Gnomish",
+                    speed: 25,
+                    size: "Small",
+                    racial: "Darkvision (60ft), Speak with Small Beasts",
+                    extCantrip: "Minor Illusion",
+                    extmod: "INT"
+                })
+            }
+            if (rolledRace === 'Rock Gnome') {
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Intelligence, Wisdom, and Charisma Saving Throws vs Magic",
+                    languages: "Common, Gnomish",
+                    speed: 25,
+                    size: "Small",
+                    tools: "Tinker's Tools",
+                    racial: "Darkvision (60ft), Artificer’s Lore, Tinker",
+                })
+            }
         }
         else if (randRace === 'Halfling') {
             rolledRace = baseHalfling[Math.floor(Math.random() * baseHalfling.length)];
-            return this.setState({
-                race: rolledRace
-            })
+            if (rolledRace === 'Lightfoot Halfling') {
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Saving Throws vs Fear",
+                    languages: "Common, Halfling",
+                    speed: 25,
+                    size: "Small",
+                    racial: "Lucky, Halfling Nimbleness, Naturally Stealthy"
+                })
+            }
+            if (rolledRace === 'Stout Halfling') {
+                return this.setState({
+                    race: rolledRace,
+                    advantage: "Saving Throws vs Fear, Saving Throws vs Poison",
+                    resistance: "Poison",
+                    languages: "Common, Halfling",
+                    speed: 25,
+                    size: "Small",
+                    racial: "Lucky, Halfling Nimbleness"
+                })
+            }
         }
         else if (randRace === 'Dragonborn') {
             rolledRace = baseDragonborn[Math.floor(Math.random() * baseDragonborn.length)];
-            return this.setState({
-                race: rolledRace
-            })
+            if (rolledRace === 'Black Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Acid",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "5x30ft Line of Acid",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Blue Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Lightning",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "5x30ft Line of Lightning",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Brass Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Fire",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "5x30ft Line of Fire",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Bronze Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Lightning",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "5x30ft Line of Lightning",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Copper Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Acid",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "5x30ft Line of Acid",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Gold Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Fire",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "15ft Cone of Fire",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Green Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Poison",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "15ft Cone of Poison",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "CON Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Red Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Fire",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "15ft Cone of Fire",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "DEX Save for 1/2"
+                })
+            }
+            if (rolledRace === 'Silver Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Cold",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "15ft Cone of Cold",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "CON Save for 1/2"
+                })
+            }
+            if (rolledRace === 'White Dragonborn') {
+                return this.setState({
+                    race: rolledRace,
+                    resistance: "Cold",
+                    languages: "Common, Draconic",
+                    speed: 30,
+                    size: "Medium",
+                    breath: "15ft Cone of Cold",
+                    breathDC : 8 + rolledHP.preCon + this.state.prf,
+                    breathST: "CON Save for 1/2"
+                })
+            }
         }
         else if (randRace === 'Human') {
             const pickH = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc", "Elvish "];
@@ -542,13 +763,13 @@ class StatRoller extends Component {
             }
             return this.setState({
                 race: "Half-Elf",
-                advantage: "Charm",
+                advantage: "Saving Throws vs Charm",
                 immunities: "Sleep",
                 racial: "Darkvision (60ft)",
                 speed: 30,
                 size: "Medium",
                 languages: "Common, Elvish, " + choiceL,
-                profSkills: rand1 + " " + rand2
+                profSkills: rand1 + ", " + rand2
             })
         }
         else if (randRace === 'HalfOrc') {
@@ -568,8 +789,8 @@ class StatRoller extends Component {
                 spell1 = "Hellish Rebuke (as if from a 2nd Level Slot) 1 / Long Rest";
             }
             if (this.state.level > 4) {
-                spell1 = "Hellish Rebuke (2nd Level Spell) 1 / Long Rest";
-                spell2 = "Darkness (2nd Level Spell) 1 / Long Rest";
+                spell1 = "Hellish Rebuke (2nd Level Spell): 1/Long Rest";
+                spell2 = "Darkness: 1/Long Rest";
             }
             return this.setState({
                 race: randRace,
@@ -666,6 +887,10 @@ class StatRoller extends Component {
                     extmod={this.state.extmod}
                     profSkills={this.state.profSkills}
                     immunities={this.state.immunities}
+                    disadvantage={this.state.disadvantage}
+                    breath={this.state.breath}
+                    breathDC={this.state.breathDC}
+                    breathST={this.state.breathST}
                 />
             </div>
         )
