@@ -196,7 +196,7 @@ class StatRoller extends Component {
             immuneities: "",
             extmod: "",
             extCantrip: "",
-            extSpell: "",
+            extSpell: "", 
             extSpell2: "",
             immunities: "",
             profSkills: "",
