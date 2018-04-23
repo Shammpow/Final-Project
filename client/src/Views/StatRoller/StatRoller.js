@@ -470,14 +470,14 @@ class StatRoller extends Component {
                 return this.setState({
                     race: rolledRace,
                     hp: rolledHP + 1,
-                    resistance: this.state.resistance + "Poison ",
-                    advantage: this.state.advantage + "Saving Throws vs Poison ",
-                    languages: this.state.languages + "Common " + "Dwarven ",
+                    resistance: "Poison",
+                    advantage: "Saving Throws vs Poison",
+                    languages: "Common, Dwarven",
                     speed: 25,
                     size: "Medium",
-                    weapons: this.state.weapons + "Battleaxe " + "Handaxe " + "Light Hammer " + "Warhammer ",
-                    racial: this.state.racial + "Darkvision (60ft) " + "Stonecunning ",
-                    tools: this.state.tools + select
+                    weapons: "Battleaxe, Handaxe, Light Hammer, Warhammer",
+                    racial: "Darkvision (60ft), Stonecunning",
+                    tools: select
                 })
             }
             if (rolledRace === 'Mountain Dwarf') {
@@ -485,15 +485,15 @@ class StatRoller extends Component {
                 let select = pick[Math.floor(Math.random() * pick.length)];
                 return this.setState({
                     race: rolledRace,
-                    resistance: this.state.resistance + "Poison ",
-                    advantage: this.state.advantage + "Saving Throws vs Poison ",
-                    languages: this.state.languages + "Common " + "Dwarven ",
+                    resistance: "Poison",
+                    advantage: "Saving Throws vs Poison,",
+                    languages: "Common, Dwarven ",
                     speed: 25,
                     size: "Medium",
-                    weapons: this.state.weapons + "Battleaxe " + "Handaxe " + "Light Hammer " + "Warhammer ",
-                    racial: this.state.racial + "Darkvision (60ft) " + "Stonecunning ",
-                    tools: this.state.tools + select,
-                    armor: this.state.armor + "Light Armor " + "Medium Armor "
+                    weapons: "Battleaxe, Handaxe, Light Hammer, Warhammer",
+                    racial: "Darkvision (60ft), Stonecunning",
+                    tools: select,
+                    armor: "Light Armor, Medium Armor"
                 })
             }
         }
@@ -528,7 +528,7 @@ class StatRoller extends Component {
                 race: randRace,
                 size: "Medium",
                 speed: 30,
-                languages: this.state.languages + "Common " + choiceH,
+                languages: "Common, " + choiceH,
             })
         }
         else if (randRace === 'HalfElf') {
@@ -542,23 +542,23 @@ class StatRoller extends Component {
             }
             return this.setState({
                 race: "Half-Elf",
-                advantage: this.state.advantage + "Charm ",
-                immunities: this.state.immunities + "Sleep ",
-                racial: this.state.racial + "Darkvision (60ft) ",
+                advantage: "Charm",
+                immunities: "Sleep",
+                racial: "Darkvision (60ft)",
                 speed: 30,
                 size: "Medium",
-                languages: this.state.languages + "Common " + "Elvish " + choiceL,
-                profSkills: this.state.profSkills + rand1 + " " + rand2
+                languages: "Common, Elvish, " + choiceL,
+                profSkills: rand1 + " " + rand2
             })
         }
         else if (randRace === 'HalfOrc') {
             return this.setState({
                 race: "Half-Orc",
-                languages: this.state.languages + "Common " + "Orc ",
+                languages: "Common, Orc",
                 speed: 30,
                 size: "Medium",
-                racial: this.state.racial + "Darkvision (60ft) " + "Savage Attacks, Relentless Endurance ",
-                profSkills: this.state.profSkills + "Intimidation "
+                racial: "Darkvision (60ft), Savage Attacks, Relentless Endurance",
+                profSkills: "Intimidation "
             })
         }
         else if (randRace === 'Tiefling') {
@@ -573,12 +573,12 @@ class StatRoller extends Component {
             }
             return this.setState({
                 race: randRace,
-                resistance: this.state.resistance + "Fire ",
-                languages: this.state.languages + "Common " + "Infernal ",
+                resistance: "Fire",
+                languages: "Common, Infernal",
                 speed: 30,
                 size: "Medium",
-                racial: this.state.racial + "Darkvision (60ft) ",
-                extCantrip: this.state.extCantrip + "Thaumaturgy ",
+                racial: "Darkvision (60ft)",
+                extCantrip: "Thaumaturgy",
                 extSpell1: spell1,
                 extSpell2: spell2,
                 extmod: "CHA"
