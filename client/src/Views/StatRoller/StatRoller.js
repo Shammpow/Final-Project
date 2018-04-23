@@ -66,7 +66,8 @@ class StatRoller extends Component {
         weapon: "",
         armor: "",
         tools: "",
-        vehicles: ""
+        vehicles: "",
+        background: ""
     };
 
     rollStr = event => {
@@ -170,6 +171,7 @@ class StatRoller extends Component {
         //     this.setState({race: choice.race, language: choice.language, speed: choice.speed})
         // })
         const classID = this.rollThatRace();
+        this.rollThatBackground();
 
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             this.setState({
@@ -184,6 +186,7 @@ class StatRoller extends Component {
         //     this.setState({race: choice.race, language: choice.language, speed: choice.speed})
         // })
         const classID = this.rollThatRace();
+        this.rollThatBackground();
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             this.setState({
                 feats: stuff.features, traits: stuff.additionalTraits, cantrips: stuff.cantrips, spells: stuff.spellSlots
@@ -454,14 +457,14 @@ class StatRoller extends Component {
                     hp: rolledHP.classHP + 1,
                     speed: 25
                 })
-
+                return this.rollRaceMods(rolledRace);
             }
             else {
                 this.setState({
                     race: rolledRace,
                     speed: 25
                 })
-
+                return this.rollRaceMods(rolledRace);
             }
 
         }
@@ -473,13 +476,14 @@ class StatRoller extends Component {
                     race: rolledRace,
                     speed: 35
                 })
+                return this.rollRaceMods(rolledRace);
             }
             else {
                 this.setState({
                     race: rolledRace,
                     speed: 30
                 })
-
+                return this.rollRaceMods(rolledRace);
             }
 
         }
@@ -490,7 +494,7 @@ class StatRoller extends Component {
                 speed: 25
 
             })
-
+            return this.rollRaceMods(rolledRace);
         }
         else if (randRace === 'Halfling') {
             rolledRace = baseHalfling[Math.floor(Math.random() * baseHalfling.length)];
@@ -499,7 +503,7 @@ class StatRoller extends Component {
                 speed: 25
 
             })
-
+            return this.rollRaceMods(rolledRace);
         }
         else if (randRace === 'Dragonborn') {
             rolledRace = baseDragonborn[Math.floor(Math.random() * baseDragonborn.length)];
@@ -508,42 +512,53 @@ class StatRoller extends Component {
                 speed: 30
 
             })
-
+            return this.rollRaceMods(rolledRace);
         }
         else if (randRace === 'Human') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-
+            return this.rollRaceMods(randRace);
         }
         else if (randRace === 'Half-Elf') {
             this.setState({
                 race: randRace,
                 speed: 25
             })
-
+            return this.rollRaceMods(randRace);
         }
         else if (randRace === 'Half-Orc') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-
+            return this.rollRaceMods(randRace);
         }
         else if (randRace === 'Tiefling') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-
+            return this.rollRaceMods(randRace);
         }
         return rolledHP;
+    }
+    rollThatBackground() {
+        const mainArr = ["Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin"];
+        let randoBG = mainArr[Math.floor(Math.random() * mainArr.length)];
+        this.setState({
+            background: randoBG
+        })
+        return randoBG;
     }
     rollHP(rolledClass) {
         let hitpoints = 0;
 
         return hitpoints;
+    }
+    rollRaceMods(race) {
+        
     }
     render() {
         return (
@@ -611,6 +626,7 @@ class StatRoller extends Component {
                     traits={this.state.traits}
                     spells={this.state.spells}
                     cantrips={this.state.cantrips}
+                    background={this.state.background}
                 />
             </div>
         )

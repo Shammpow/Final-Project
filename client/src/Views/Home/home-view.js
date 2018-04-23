@@ -184,8 +184,7 @@ const Home = props =>
 
           <ul className="wallOfText backgroundStuff list-group">
             <li className="background list-group-item">
-              Background: {props.todo}.
-              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Background: {props.background}
             </li>
             <li className="languages list-group-item">
               Languages: {props.languages}
