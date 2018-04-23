@@ -81,7 +81,7 @@ class StatRoller extends Component {
             strsave: ultMod,
             athletics: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollDex = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -99,7 +99,7 @@ class StatRoller extends Component {
             sleight: ultMod,
             stealth: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollCon = () => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -111,7 +111,7 @@ class StatRoller extends Component {
             conmod: ultMod,
             consave: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollInt = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -128,7 +128,7 @@ class StatRoller extends Component {
             nature: ultMod,
             religion: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollWis = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -145,7 +145,7 @@ class StatRoller extends Component {
             perception: ultMod,
             survival: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollCha = event => {
         let result = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
@@ -161,7 +161,7 @@ class StatRoller extends Component {
             performance: ultMod,
             persuasion: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     componentDidMount = () => {
         // consolidate
@@ -256,55 +256,61 @@ class StatRoller extends Component {
         let baseRoll = baseArr[Math.floor(Math.random() * baseArr.length)];
         let rolledClass;
         let preStr = this.rollStr();
+        let preStrRes = preStr.result;
         let preDex = this.rollDex();
+        let preDexRes = preDex.result;
         let preCon = this.rollCon();
+        let preConRes = preCon.result;
         let preInt = this.rollInt();
+        let preIntRes = preInt.result;
         let preWis = this.rollWis();
+        let preWisRes = preWis.result;
         let preCha = this.rollCha();
+        let preChaRes = preCha.result;
         if (baseRoll === 'Barbarian') {
-            let finalStr = preStr + this.state.prf
-            let finalCon = preCon + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
+            let finalCon = preCon.ultMod + this.state.prf
             rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
-            let classHP = 12 + preCon
+            let classHP = 12 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Bard') {
-            let finalDex = preDex + this.state.prf
-            let finalCha = preCha + this.state.prf
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
             rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 dexsave: finalDex,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Cleric') {
-            let finalWis = preWis + this.state.prf;
-            let finalCha = preCha + this.state.prf
+            let finalWis = preWis.ultMod + this.state.prf;
+            let finalCha = preCha.ultMod + this.state.prf
             rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Druid') {
-            let finalWis = preWis + this.state.prf
-            let finalInt = preInt + this.state.prf
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
             rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -312,13 +318,13 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Fighter') {
-            let finalStr = preStr + this.state.prf
-            let finalCon = preCon + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
+            let finalCon = preCon.ultMod + this.state.prf
             rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preCon
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -326,13 +332,13 @@ class StatRoller extends Component {
                 consave: finalCon
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Monk') {
-            let finalDex = preDex + this.state.prf
-            let finalStr = preStr + this.state.prf
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
             rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -340,13 +346,13 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Paladin') {
-            let finalWis = preWis + this.state.prf
-            let finalCha = preCha + this.state.prf
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
             rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preCon
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -354,13 +360,13 @@ class StatRoller extends Component {
                 chasave: finalCha
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Ranger') {
-            let finalDex = preDex + this.state.prf
-            let finalStr = preStr + this.state.prf
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
             rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
-            let classHP = 10 + preCon
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -368,13 +374,13 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Rogue') {
-            let finalDex = preDex + this.state.prf
-            let finalInt = preInt + this.state.prf
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
             rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -382,52 +388,52 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Sorcerer') {
-            let finalCon = preCon + this.state.prf
-            let finalCha = preCha + this.state.prf
+            let finalCon = preCon.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
             rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
             if (rolledClass === "Wild Sorcerer") {
-                let classHP = 6 + preCon
+                let classHP = 6 + preCon.ultMod
                 this.setState({
                     class: rolledClass,
                     hp: classHP,
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll }
+                return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
             }
             else {
                 let rollSorcDrag = sorcDrags[Math.floor(Math.random() * sorcDrags.length)] + " " + baseRoll;
-                let classHP = 6 + preCon + this.state.level
+                let classHP = 6 + preCon.ultMod + this.state.level
                 this.setState({
                     class: rollSorcDrag,
                     hp: classHP,
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll }
+                return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
             }
         }
         else if (baseRoll === 'Warlock') {
-            let finalWis = preWis + this.state.prf
-            let finalCha = preCha + this.state.prf
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
             rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
-            let classHP = 8 + preCon
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
         else if (baseRoll === 'Wizard') {
-            let finalWis = preWis + this.state.prf
-            let finalInt = preInt + this.state.prf
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
             rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
-            let classHP = 6 + preCon
+            let classHP = 6 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -435,7 +441,7 @@ class StatRoller extends Component {
                 wissave: finalWis
 
             })
-            return { classHP, baseRoll }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha }
         }
     }
     rollThatRace = () => {
@@ -457,14 +463,16 @@ class StatRoller extends Component {
                     hp: rolledHP.classHP + 1,
                     speed: 25
                 })
-                return this.rollRaceMods(rolledRace);
+                this.rollRaceMods(rolledRace, rolledHP.preCon.result, rolledHP.preWis.result);
+                return rolledHP;
             }
             else {
                 this.setState({
                     race: rolledRace,
                     speed: 25
                 })
-                return this.rollRaceMods(rolledRace);
+                this.rollRaceMods(rolledRace, rolledHP.preStr.result, rolledHP.preCon.result);
+                return rolledHP;
             }
 
         }
@@ -476,34 +484,69 @@ class StatRoller extends Component {
                     race: rolledRace,
                     speed: 35
                 })
-                return this.rollRaceMods(rolledRace);
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preWis.result);
+                return rolledHP;
+            }
+            else if (rolledRace === "High Elf") {
+                this.setState({
+                    race: rolledRace,
+                    speed: 30
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preInt.result);
+                return rolledHP;
             }
             else {
                 this.setState({
                     race: rolledRace,
                     speed: 30
                 })
-                return this.rollRaceMods(rolledRace);
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preCha.result);
+                return rolledHP;
             }
 
         }
         else if (randRace === 'Gnome') {
             rolledRace = baseGnome[Math.floor(Math.random() * baseGnome.length)];
-            this.setState({
-                race: rolledRace,
-                speed: 25
+            if (rolledRace === "Forest Gnome") {
+                this.setState({
+                    race: rolledRace,
+                    speed: 25
 
-            })
-            return this.rollRaceMods(rolledRace);
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preInt.result, rolledHP.preDex.result);
+                return rolledHP;
+            }
+            else { //rock gnome
+                this.setState({
+                    race: rolledRace,
+                    speed: 25
+
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preInt.result, rolledHP.preCon.result);
+                return rolledHP;
+            }
         }
         else if (randRace === 'Halfling') {
             rolledRace = baseHalfling[Math.floor(Math.random() * baseHalfling.length)];
-            this.setState({
-                race: rolledRace,
-                speed: 25
+            if (rolledRace === "Lightfoot Halfling") {
+                this.setState({
+                    race: rolledRace,
+                    speed: 25
 
-            })
-            return this.rollRaceMods(rolledRace);
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preCha.result);
+                return rolledHP;
+            }
+            else {
+                this.setState({
+                    race: rolledRace,
+                    speed: 25
+
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preCon.result);
+                return rolledHP;
+            }
+
         }
         else if (randRace === 'Dragonborn') {
             rolledRace = baseDragonborn[Math.floor(Math.random() * baseDragonborn.length)];
@@ -512,37 +555,42 @@ class StatRoller extends Component {
                 speed: 30
 
             })
-            return this.rollRaceMods(rolledRace);
+            this.rollRaceMods(rolledRace);
+            return rolledHP;
         }
         else if (randRace === 'Human') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-            return this.rollRaceMods(randRace);
+            this.rollRaceMods(randRace);
+            return rolledHP;
         }
         else if (randRace === 'Half-Elf') {
             this.setState({
                 race: randRace,
                 speed: 25
             })
-            return this.rollRaceMods(randRace);
+            this.rollRaceMods(randRace);
+            return rolledHP;
         }
         else if (randRace === 'Half-Orc') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-            return this.rollRaceMods(randRace);
+            this.rollRaceMods(randRace);
+            return rolledHP;
         }
         else if (randRace === 'Tiefling') {
             this.setState({
                 race: randRace,
                 speed: 30
             })
-            return this.rollRaceMods(randRace);
+            this.rollRaceMods(randRace);
+            return rolledHP;
         }
-        return rolledHP;
+
     }
     rollThatBackground() {
         const mainArr = ["Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin"];
@@ -552,13 +600,167 @@ class StatRoller extends Component {
         })
         return randoBG;
     }
-    rollHP(rolledClass) {
-        let hitpoints = 0;
+    // rollHP(rolledClass) {
+    //     let hitpoints = 0;
 
-        return hitpoints;
-    }
-    rollRaceMods(race) {
-        
+    //     return hitpoints;
+    // }
+    rollRaceMods(race, val1, val2, val3, val4, val5, val6) {
+        console.log("Race: " + race);
+        if (race === "Hill Dwarf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                con: val1 + 2,
+                wis: val2 + 1,
+                conmod: skewedMod,
+                wismod: skewedMod2
+            })
+        }
+        else if (race === "Mountain Dwarf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 8;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                str: val1 + 2,
+                con: val2 + 2,
+                strmod: skewedMod,
+                conmod: skewedMod2
+            })
+        }
+        else if (race === "Wood Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                wis: val2 + 1,
+                dexmod: skewedMod,
+                wismod: skewedMod2
+            })
+        }
+        else if (race === "High Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                int: val2 + 1,
+                dexmod: skewedMod,
+                intmod: skewedMod2
+            })
+        }
+        else if (race === "Drow Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                cha: val2 + 1,
+                dexmod: skewedMod,
+                chamod: skewedMod2
+            })
+        }
+        else if (race === "Forest Gnome") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                int: val1 + 2,
+                dex: val2 + 1,
+                intmod: skewedMod,
+                dexmod: skewedMod2
+            })
+        }
+        else if (race === "Rock Gnome") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                int: val1 + 2,
+                con: val2 + 1,
+                intmod: skewedMod,
+                conmod: skewedMod2
+            })
+        }
+        else if (race === "Lightfoot Halfling") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                cha: val2 + 1,
+                dexmod: skewedMod,
+                chamod: skewedMod2
+            })
+        }
+        else if (race === "Stout Halfling") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                con: val2 + 1,
+                dexmod: skewedMod,
+                conmod: skewedMod2
+            })
+        }
+
     }
     render() {
         return (
