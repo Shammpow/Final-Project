@@ -79,12 +79,13 @@ class StatRoller extends Component {
 
         breath: "",
         breathDC: "",
-        breathST: ""
+        breathST: "",
 
+        background: ""
     };
 
     rollStr = event => {
-        let result = random(1, 6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -94,10 +95,10 @@ class StatRoller extends Component {
             strsave: ultMod,
             athletics: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollDex = event => {
-        let result = random(1,6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -112,10 +113,10 @@ class StatRoller extends Component {
             sleight: ultMod,
             stealth: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollCon = () => {
-        let result = random(1,6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -124,10 +125,10 @@ class StatRoller extends Component {
             conmod: ultMod,
             consave: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollInt = event => {
-        let result = random(1,6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -141,10 +142,10 @@ class StatRoller extends Component {
             nature: ultMod,
             religion: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollWis = event => {
-        let result = random(1,6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -158,10 +159,10 @@ class StatRoller extends Component {
             perception: ultMod,
             survival: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     rollCha = event => {
-        let result = random(1,6) + random(1,6) + random(1,6);
+        let result = random(1, 6) + random(1, 6) + random(1, 6);
         let postMod = result - 10;
         let blahMod = postMod / 2;
         let ultMod = Math.floor(blahMod);
@@ -174,12 +175,13 @@ class StatRoller extends Component {
             performance: ultMod,
             persuasion: ultMod
         });
-        return ultMod
+        return { result, ultMod }
     };
     componentDidMount = () => {
         // consolidate
         this.rollAlign()
         const classID = this.rollThatRace();
+        this.rollThatBackground();
 
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             console.log(classID.baseRoll)
@@ -193,6 +195,7 @@ class StatRoller extends Component {
         this.grandReset();
         this.rollAlign();
         const classID = this.rollThatRace();
+        this.rollThatBackground();
         racesAPI.getClassInfo(classID.baseRoll).then(stuff => {
             console.log(stuff)
             console.log(classID.baseRoll)
@@ -287,55 +290,61 @@ class StatRoller extends Component {
         let baseRoll = sample(baseArr)
         let rolledClass;
         let preStr = this.rollStr();
+        //let preStrRes = preStr.result;
         let preDex = this.rollDex();
+        //let preDexRes = preDex.result;
         let preCon = this.rollCon();
+        // let preConRes = preCon.result;
         let preInt = this.rollInt();
+        // let preIntRes = preInt.result;
         let preWis = this.rollWis();
+        // let preWisRes = preWis.result;
         let preCha = this.rollCha();
+        // let preChaRes = preCha.result;
         if (baseRoll === 'Barbarian') {
-            let finalStr = preStr + this.state.prf
-            let finalCon = preCon + this.state.prf
-            rolledClass = sample(barbSubs) + " " + baseRoll;
-            let classHP = 12 + preCon
+            let finalStr = preStr.ultMod + this.state.prf
+            let finalCon = preCon.ultMod + this.state.prf
+            rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
+            let classHP = 12 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon,
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalStr, finalCon }
         }
         else if (baseRoll === 'Bard') {
-            let finalDex = preDex + this.state.prf
-            let finalCha = preCha + this.state.prf
-            rolledClass = sample(bardSubs) + " " + baseRoll;
-            let classHP = 8 + preCon
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
+            rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 dexsave: finalDex,
                 chasave: finalCha
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalDex, finalCha }
         }
         else if (baseRoll === 'Cleric') {
-            let finalWis = preWis + this.state.prf;
-            let finalCha = preCha + this.state.prf
-            rolledClass = sample(clerSubs) + " " + baseRoll;
-            let classHP = 8 + preCon
+            let finalWis = preWis.ultMod + this.state.prf;
+            let finalCha = preCha.ultMod + this.state.prf
+            rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalWis, finalCha }
         }
         else if (baseRoll === 'Druid') {
-            let finalWis = preWis + this.state.prf
-            let finalInt = preInt + this.state.prf
-            rolledClass = sample(druidSubs) + " " + baseRoll;
-            let classHP = 8 + preCon
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
+            rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -343,26 +352,26 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalWis, finalInt }
         }
         else if (baseRoll === 'Fighter') {
-            let finalStr = preStr + this.state.prf
-            let finalCon = preCon + this.state.prf
-            rolledClass = sample(fighSubs) + " " + baseRoll;
-            let classHP = 10 + preCon
+            let finalStr = preStr.ultMod + this.state.prf
+            let finalCon = preCon.ultMod + this.state.prf
+            rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 strsave: finalStr,
                 consave: finalCon
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalStr, finalCon }
         }
         else if (baseRoll === 'Monk') {
-            let finalDex = preDex + this.state.prf
-            let finalStr = preStr + this.state.prf
-            rolledClass = sample(monkSubs) + " " + baseRoll;
-            let classHP = 8 + preCon
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
+            rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -370,13 +379,13 @@ class StatRoller extends Component {
                 dexsave: finalStr
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalDex, finalStr }
         }
         else if (baseRoll === 'Paladin') {
-            let finalWis = preWis + this.state.prf
-            let finalCha = preCha + this.state.prf
-            rolledClass = sample(palaSubs) + " " + baseRoll;
-            let classHP = 10 + preCon
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
+            rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -384,27 +393,27 @@ class StatRoller extends Component {
                 chasave: finalCha
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalWis, finalCha }
         }
         else if (baseRoll === 'Ranger') {
-            let finalDex = preDex + this.state.prf
-            let finalStr = preStr + this.state.prf
-            rolledClass = sample(rangSubs) + " " + baseRoll;
-            let classHP = 10 + preCon
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalStr = preStr.ultMod + this.state.prf
+            rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
+            let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
-                strsave: finalDex,
-                dexsave: finalStr
+                strsave: finalStr,
+                dexsave: finalDex
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalStr, finalDex }
         }
         else if (baseRoll === 'Rogue') {
-            let finalDex = preDex + this.state.prf
-            let finalInt = preInt + this.state.prf
-            rolledClass = sample(rogSubs) + " " + baseRoll;
-            let classHP = 8 + preCon
+            let finalDex = preDex.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
+            rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -412,52 +421,52 @@ class StatRoller extends Component {
                 intsave: finalInt
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalDex, finalInt }
         }
         else if (baseRoll === 'Sorcerer') {
-            let finalCon = preCon + this.state.prf
-            let finalCha = preCha + this.state.prf
-            rolledClass = sample(sorcSubs) + " " + baseRoll;
+            let finalCon = preCon.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
+            rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
             if (rolledClass === "Wild Sorcerer") {
-                let classHP = 6 + preCon
+                let classHP = 6 + preCon.ultMod
                 this.setState({
                     class: rolledClass,
                     hp: classHP,
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll, preCon }
+                return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalCha, finalCon }
             }
             else {
-                let rollSorcDrag = sample(sorcDrags) + " " + baseRoll;
-                let classHP = 6 + preCon + this.state.level
+                let rollSorcDrag = sorcDrags[Math.floor(Math.random() * sorcDrags.length)] + " " + baseRoll;
+                let classHP = 6 + preCon.ultMod + this.state.level
                 this.setState({
                     class: rollSorcDrag,
                     hp: classHP,
                     chasave: finalCha,
                     consave: finalCon
                 })
-                return { classHP, baseRoll, preCon }
+                return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalCha, finalCon }
             }
         }
         else if (baseRoll === 'Warlock') {
-            let finalWis = preWis + this.state.prf
-            let finalCha = preCha + this.state.prf
-            rolledClass = sample(warlSubs);
-            let classHP = 8 + preCon
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalCha = preCha.ultMod + this.state.prf
+            rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
+            let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
                 wissave: finalWis,
                 chasave: finalCha
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalWis, finalCha }
         }
         else if (baseRoll === 'Wizard') {
-            let finalWis = preWis + this.state.prf
-            let finalInt = preInt + this.state.prf
-            rolledClass = sample(wizSubs) + " " + baseRoll;
-            let classHP = 6 + preCon
+            let finalWis = preWis.ultMod + this.state.prf
+            let finalInt = preInt.ultMod + this.state.prf
+            rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
+            let classHP = 6 + preCon.ultMod
             this.setState({
                 hp: classHP,
                 class: rolledClass,
@@ -465,7 +474,7 @@ class StatRoller extends Component {
                 wissave: finalWis
 
             })
-            return { classHP, baseRoll, preCon }
+            return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalInt, finalWis }
         }
     }
     rollThatRace = () => {
@@ -486,7 +495,6 @@ class StatRoller extends Component {
         let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
         let rolledRace;
         let rolledHP = this.rollThatClass();
-
         if (randRace === 'Dwarf') {
             rolledRace = sample(baseDwarf)
             if (rolledRace === 'Hill Dwarf') {
@@ -504,7 +512,8 @@ class StatRoller extends Component {
                     racial: "Darkvision (60ft), Stonecunning",
                     tools: select
                 })
-
+                this.rollRaceMods(rolledRace, rolledHP.preCon.result, rolledHP.preWis.result);
+                
             }
             if (rolledRace === 'Mountain Dwarf') {
                 const pick = ["Mason's Tools", "Brewer's Tools", "Smith's Tools"];
@@ -521,7 +530,8 @@ class StatRoller extends Component {
                     tools: select,
                     armor: "Light Armor, Medium Armor"
                 })
-
+                this.rollRaceMods(rolledRace, rolledHP.preStr.result, rolledHP.preCon.result);
+                
             }
         }
 
@@ -558,6 +568,16 @@ class StatRoller extends Component {
                     profSkills: "Perception",
                     weapons: "Longsword, Shortsword, Longbow, Shortbow",
                 })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preWis.result);
+                
+            }
+            else if (rolledRace === "High Elf") {
+                this.setState({
+                    race: rolledRace,
+                    speed: 30
+                })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preInt.result);
+                
             }
             if (rolledRace === 'Drow Elf') {
                 let spell1;
@@ -585,10 +605,9 @@ class StatRoller extends Component {
                     extSpell1: spell1,
                     extSpell2: spell2,
                 })
+                this.rollRaceMods(rolledRace, rolledHP.preDex.result, rolledHP.preCha.result);
+                
             }
-            this.setState({
-                race: rolledRace
-            })
         }
         else if (randRace === 'Gnome') {
             rolledRace = baseGnome[Math.floor(Math.random() * baseGnome.length)];
@@ -772,7 +791,8 @@ class StatRoller extends Component {
                 speed: 30,
                 languages: "Common, " + choiceH,
             })
-
+            this.rollRaceMods(randRace, rolledHP.preStr.result, rolledHP.preDex.result, rolledHP.preCon.result, rolledHP.preInt.result, rolledHP.preWis.result, rolledHP.preCha.result);
+            
         }
         else if (randRace === 'HalfElf') {
             pickL = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"];
@@ -793,7 +813,8 @@ class StatRoller extends Component {
                 languages: "Common, Elvish, " + choiceL,
                 profSkills: rand1 + ", " + rand2
             })
-
+            this.rollRaceMods(randRace, rolledHP.preStr.result, rolledHP.preDex.result, rolledHP.preCon.result, rolledHP.preInt.result, rolledHP.preWis.result, rolledHP.preCha.result);
+            
         }
         else if (randRace === 'HalfOrc') {
             this.setState({
@@ -804,7 +825,8 @@ class StatRoller extends Component {
                 racial: "Darkvision (60ft), Savage Attacks, Relentless Endurance",
                 profSkills: "Intimidation "
             })
-
+            this.rollRaceMods(randRace, rolledHP.preStr.result, rolledHP.preCon.result);
+            
         }
         else if (randRace === 'Tiefling') {
             let spell1;
@@ -828,14 +850,814 @@ class StatRoller extends Component {
                 extSpell2: spell2,
                 extmod: "CHA"
             })
-
+            this.rollRaceMods(randRace, rolledHP.preCha.result, rolledHP.preInt.result);
+            
         }
         return rolledHP;
     }
-    rollHP(rolledClass) {
-        let hitpoints = 0;
+    rollThatBackground() {
+        const mainArr = ["Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin"];
+        let randoBG = mainArr[Math.floor(Math.random() * mainArr.length)];
+        this.setState({
+            background: randoBG
+        })
+        return randoBG;
+    }
+    rollRaceMods(race, val1, val2, val3, val4, val5, val6) {
+        console.log("Race: " + race);
+        if (race === "Hill Dwarf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
 
-        return hitpoints;
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                con: val1 + 2,
+                wis: val2 + 1,
+                conmod: skewedMod,
+                wismod: skewedMod2,
+                consave: skewedMod + this.state.prf,
+                wissave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Mountain Dwarf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 8;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                str: val1 + 2,
+                con: val2 + 2,
+                strmod: skewedMod,
+                conmod: skewedMod2,
+                strsave: skewedMod + this.state.prf,
+                consave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Wood Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                wis: val2 + 1,
+                dexmod: skewedMod,
+                wismod: skewedMod2,
+                dexsave: skewedMod + this.state.prf,
+                wissave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "High Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                int: val2 + 1,
+                dexmod: skewedMod,
+                intmod: skewedMod2,
+                dexsave: skewedMod + this.state.prf,
+                intsave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Drow Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                cha: val2 + 1,
+                dexmod: skewedMod,
+                chamod: skewedMod2,
+                dexsave: skewedMod + this.state.prf,
+                chasave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Forest Gnome") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                int: val1 + 2,
+                dex: val2 + 1,
+                intmod: skewedMod,
+                dexmod: skewedMod2,
+                intsave: skewedMod + this.state.prf,
+                dexsave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Rock Gnome") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                int: val1 + 2,
+                con: val2 + 1,
+                intmod: skewedMod,
+                conmod: skewedMod2,
+                intsave: skewedMod + this.state.prf,
+                consave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Lightfoot Halfling") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                cha: val2 + 1,
+                dexmod: skewedMod,
+                chamod: skewedMod2,
+                dexsave: skewedMod + this.state.prf,
+                chasave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Stout Halfling") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                dex: val1 + 2,
+                con: val2 + 1,
+                dexmod: skewedMod,
+                conmod: skewedMod2,
+                dexsave: skewedMod + this.state.prf,
+                consave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Human") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2 + ", Val 3: " + val3 + ", Val 4: " + val4 + ", Val 5: " + val5 + ", Val 6: " + val6);
+            let preMod = val1 - 9;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+
+            let preMod3 = val3 - 9;
+            let thisMod3 = preMod3 / 2;
+            let skewedMod3 = Math.floor(thisMod3);
+
+            let preMod4 = val4 - 9;
+            let thisMod4 = preMod4 / 2;
+            let skewedMod4 = Math.floor(thisMod4);
+
+            let preMod5 = val5 - 9;
+            let thisMod5 = preMod5 / 2;
+            let skewedMod5 = Math.floor(thisMod5);
+
+            let preMod6 = val6 - 9;
+            let thisMod6 = preMod6 / 2;
+            let skewedMod6 = Math.floor(thisMod6);
+            this.setState({
+                str: val1 + 1,
+                dex: val2 + 1,
+                con: val3 + 1,
+                int: val4 + 1,
+                wis: val5 + 1,
+                cha: val6 + 1,
+                strmod: skewedMod,
+                dexmod: skewedMod2,
+                conmod: skewedMod3,
+                intmod: skewedMod4,
+                wismod: skewedMod5,
+                chamod: skewedMod6,
+                strsave: skewedMod + this.state.prf,
+                dexsave: skewedMod2 + this.state.prf,
+                consave: skewedMod3 + this.state.prf,
+                intsave: skewedMod4 + this.state.prf,
+                wissave: skewedMod5 + this.state.prf,
+                chasave: skewedMod6 + this.state.prf,
+            })
+        }
+        else if (race === "Dragonborn") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                str: val1 + 2,
+                cha: val2 + 1,
+                strmod: skewedMod,
+                chamod: skewedMod2,
+                strsave: skewedMod + this.state.prf,
+                chasave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Half-Elf") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            const halfelfXD = ["str", "dex", "con", "int", "wis"];
+            let rand1 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
+            let rand2 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
+            if (rand1 === rand2) {
+                rand2 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
+            }
+            if (rand1 === "str") {
+                if (rand2 === "dex") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val2 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        dex: val2,
+                        dexmod: skewedMod3,
+                        dexsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "con") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val3 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        con: val3,
+                        conmod: skewedMod3,
+                        consave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "int") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val4 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        int: val4,
+                        intmod: skewedMod3,
+                        intsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand1 === "wis") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val5 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        wis: val5,
+                        wismod: skewedMod3,
+                        wissave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+            }
+            else if (rand1 === "dex") {
+                if (rand2 === "str") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val2 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        dex: val2,
+                        dexmod: skewedMod3,
+                        dexsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "con") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val3 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val2 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        con: val3,
+                        conmod: skewedMod2,
+                        consave: skewedMod2 + this.state.prf,
+                        dex: val2,
+                        dexmod: skewedMod3,
+                        dexsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "int") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val4 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val2 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        int: val4,
+                        intmod: skewedMod2,
+                        intsave: skewedMod2 + this.state.prf,
+                        dex: val2,
+                        dexmod: skewedMod3,
+                        dexsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "wis") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val5 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val2 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        wis: val5,
+                        wismod: skewedMod2,
+                        wissave: skewedMod2 + this.state.prf,
+                        dex: val2,
+                        dexmod: skewedMod3,
+                        dexsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+            }
+            else if (rand1 === "con") {
+                if (rand2 === "str") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val3 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        con: val3,
+                        conmod: skewedMod3,
+                        consave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "dex") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val2 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val3 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        dex: val2,
+                        dexmod: skewedMod2,
+                        dexsave: skewedMod2 + this.state.prf,
+                        con: val3,
+                        conmod: skewedMod3,
+                        consave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                if (rand2 === "int") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val4 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val3 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        int: val4,
+                        intmod: skewedMod2,
+                        intsave: skewedMod2 + this.state.prf,
+                        con: val3,
+                        conmod: skewedMod3,
+                        consave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                if (rand2 === "wis") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val5 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val3 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        wis: val5,
+                        wismod: skewedMod2,
+                        wissave: skewedMod2 + this.state.prf,
+                        con: val3,
+                        conmod: skewedMod3,
+                        consave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+            }
+            else if (rand1 === "int") {
+                if (rand2 === "str") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val4 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        int: val4,
+                        intmod: skewedMod3,
+                        intsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "dex") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val2 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val4 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        dex: val2,
+                        dexmod: skewedMod2,
+                        dexsave: skewedMod2 + this.state.prf,
+                        int: val4,
+                        intmod: skewedMod3,
+                        intsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "con") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val3 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val4 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        con: val3,
+                        conmod: skewedMod2,
+                        consave: skewedMod2 + this.state.prf,
+                        int: val4,
+                        intmod: skewedMod3,
+                        intsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "wis") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val5 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val4 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        wis: val5,
+                        wismod: skewedMod2,
+                        wissave: skewedMod2 + this.state.prf,
+                        int: val4,
+                        intmod: skewedMod3,
+                        intsave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+            }
+            else if (rand1 === "wis") {
+                if (rand2 === "str") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val1 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val5 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        str: val1,
+                        strmod: skewedMod2,
+                        strsave: skewedMod2 + this.state.prf,
+                        wis: val5,
+                        wismod: skewedMod3,
+                        wissave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "dex") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val2 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val5 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        dex: val2,
+                        dexmod: skewedMod2,
+                        dexsave: skewedMod2 + this.state.prf,
+                        wis: val5,
+                        wismod: skewedMod3,
+                        wissave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "con") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val3 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val5 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        con: val3,
+                        conmod: skewedMod2,
+                        consave: skewedMod2 + this.state.prf,
+                        wis: val5,
+                        wismod: skewedMod3,
+                        wissave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+                else if (rand2 === "int") {
+                    let preMod = val6 - 8;
+                    let thisMod = preMod / 2;
+                    let skewedMod = Math.floor(thisMod);
+
+                    let preMod2 = val4 - 9;
+                    let thisMod2 = preMod2 / 2;
+                    let skewedMod2 = Math.floor(thisMod2);
+
+                    let preMod3 = val5 - 9;
+                    let thisMod3 = preMod3 / 2;
+                    let skewedMod3 = Math.floor(thisMod3);
+                    console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+                    this.setState({
+                        int: val4,
+                        intmod: skewedMod2,
+                        intsave: skewedMod2 + this.state.prf,
+                        wis: val5,
+                        wismod: skewedMod3,
+                        wissave: skewedMod3 + this.state.prf,
+                        cha: val6 + 1,
+                        chamod: skewedMod,
+                        chasave: skewedMod + this.state.prf
+                    })
+                }
+            }
+        }
+        else if (race === "Half-Orc") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                str: val1 + 2,
+                con: val2 + 1,
+                strmod: skewedMod,
+                conmod: skewedMod2,
+                strsave: skewedMod + this.state.prf,
+                consave: skewedMod2 + this.state.prf
+            })
+        }
+        else if (race === "Tiefling") {
+            console.log("Val 1: " + val1 + ", Val 2: " + val2)
+            let preMod = val1 - 8;
+            let thisMod = preMod / 2;
+            let skewedMod = Math.floor(thisMod);
+
+            let preMod2 = val2 - 9;
+            let thisMod2 = preMod2 / 2;
+            let skewedMod2 = Math.floor(thisMod2);
+            console.log("skewedMod1: " + skewedMod + ", skewedMod2: " + skewedMod2)
+            this.setState({
+                cha: val1 + 2,
+                int: val2 + 1,
+                chamod: skewedMod,
+                intmod: skewedMod2,
+                chasave: skewedMod + this.state.prf,
+                intsave: skewedMod2 + this.state.prf
+            })
+        }
     }
     render() {
         return (
@@ -921,6 +1743,7 @@ class StatRoller extends Component {
                     traits={this.state.traits}
                     cantrips={this.state.cantrips}
                     spells={this.state.spells}
+                    background={this.state.background}
                 />
             </div>
         )
