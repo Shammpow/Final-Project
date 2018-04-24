@@ -304,7 +304,7 @@ class StatRoller extends Component {
         if (baseRoll === 'Barbarian') {
             let finalStr = preStr.ultMod + this.state.prf
             let finalCon = preCon.ultMod + this.state.prf
-            rolledClass = barbSubs[Math.floor(Math.random() * barbSubs.length)] + " " + baseRoll;
+            rolledClass = sample(barbSubs) + " " + baseRoll;
             let classHP = 12 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -317,7 +317,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Bard') {
             let finalDex = preDex.ultMod + this.state.prf
             let finalCha = preCha.ultMod + this.state.prf
-            rolledClass = bardSubs[Math.floor(Math.random() * bardSubs.length)] + " " + baseRoll;
+            rolledClass = sample(bardSubs) + " " + baseRoll;
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -330,7 +330,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Cleric') {
             let finalWis = preWis.ultMod + this.state.prf;
             let finalCha = preCha.ultMod + this.state.prf
-            rolledClass = clerSubs[Math.floor(Math.random() * clerSubs.length)] + " " + baseRoll;
+            rolledClass = sample(clerSubs) + " " + baseRoll;
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -343,7 +343,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Druid') {
             let finalWis = preWis.ultMod + this.state.prf
             let finalInt = preInt.ultMod + this.state.prf
-            rolledClass = druidSubs[Math.floor(Math.random() * druidSubs.length)] + " " + baseRoll;
+            rolledClass = sample(druidSubs) + " " + baseRoll;
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -357,7 +357,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Fighter') {
             let finalStr = preStr.ultMod + this.state.prf
             let finalCon = preCon.ultMod + this.state.prf
-            rolledClass = fighSubs[Math.floor(Math.random() * fighSubs.length)] + " " + baseRoll;
+            rolledClass = sample(fighSubs) + " " + baseRoll;
             let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -370,7 +370,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Monk') {
             let finalDex = preDex.ultMod + this.state.prf
             let finalStr = preStr.ultMod + this.state.prf
-            rolledClass = monkSubs[Math.floor(Math.random() * monkSubs.length)] + " " + baseRoll;
+            rolledClass = sample(monkSubs) + " " + baseRoll;
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -384,7 +384,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Paladin') {
             let finalWis = preWis.ultMod + this.state.prf
             let finalCha = preCha.ultMod + this.state.prf
-            rolledClass = palaSubs[Math.floor(Math.random() * palaSubs.length)] + " " + baseRoll;
+            rolledClass = sample(palaSubs) + " " + baseRoll;
             let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -398,7 +398,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Ranger') {
             let finalDex = preDex.ultMod + this.state.prf
             let finalStr = preStr.ultMod + this.state.prf
-            rolledClass = rangSubs[Math.floor(Math.random() * rangSubs.length)] + " " + baseRoll;
+            rolledClass = sample(rangSubs) + " " + baseRoll;
             let classHP = 10 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -412,7 +412,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Rogue') {
             let finalDex = preDex.ultMod + this.state.prf
             let finalInt = preInt.ultMod + this.state.prf
-            rolledClass = rogSubs[Math.floor(Math.random() * rogSubs.length)] + " " + baseRoll;
+            rolledClass = sample(rogSubs) + " " + baseRoll;
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -426,7 +426,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Sorcerer') {
             let finalCon = preCon.ultMod + this.state.prf
             let finalCha = preCha.ultMod + this.state.prf
-            rolledClass = sorcSubs[Math.floor(Math.random() * sorcSubs.length)] + " " + baseRoll;
+            rolledClass = sample(sorcSubs) + " " + baseRoll;
             if (rolledClass === "Wild Sorcerer") {
                 let classHP = 6 + preCon.ultMod
                 this.setState({
@@ -438,7 +438,7 @@ class StatRoller extends Component {
                 return { classHP, baseRoll, preStr, preDex, preCon, preInt, preWis, preCha, finalCha, finalCon }
             }
             else {
-                let rollSorcDrag = sorcDrags[Math.floor(Math.random() * sorcDrags.length)] + " " + baseRoll;
+                let rollSorcDrag = sample(sorcDrags) + " " + baseRoll;
                 let classHP = 6 + preCon.ultMod + this.state.level
                 this.setState({
                     class: rollSorcDrag,
@@ -452,7 +452,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Warlock') {
             let finalWis = preWis.ultMod + this.state.prf
             let finalCha = preCha.ultMod + this.state.prf
-            rolledClass = warlSubs[Math.floor(Math.random() * warlSubs.length)];
+            rolledClass = sample(warlSubs);
             let classHP = 8 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -465,7 +465,7 @@ class StatRoller extends Component {
         else if (baseRoll === 'Wizard') {
             let finalWis = preWis.ultMod + this.state.prf
             let finalInt = preInt.ultMod + this.state.prf
-            rolledClass = wizSubs[Math.floor(Math.random() * wizSubs.length)] + " " + baseRoll;
+            rolledClass = sample(wizSubs) + " " + baseRoll;
             let classHP = 6 + preCon.ultMod
             this.setState({
                 hp: classHP,
@@ -483,7 +483,7 @@ class StatRoller extends Component {
         const baseElf = ['High Elf', 'Wood Elf', 'Drow Elf']
         const baseGnome = ['Forest Gnome', 'Rock Gnome']
         const baseHalfling = ['Lightfoot Halfling', 'Stout Halfling']
-        const baseDragonborn = ['Black Dragonborn', 'Blue Dragonborn', 'Brass Dragonborn', 'Bronze Dragonbron', 'Copper Dragonborn', 'Gold Dragonborn', 'Green Dragonborn', 'Red Dragonborn', 'Silver Dragonborn', 'White Dragonborn']
+        const baseDragonborn = ['Black Dragonborn', 'Blue Dragonborn', 'Brass Dragonborn', 'Bronze Dragonborn', 'Copper Dragonborn', 'Gold Dragonborn', 'Green Dragonborn', 'Red Dragonborn', 'Silver Dragonborn', 'White Dragonborn']
 
         let choiceL;
         let choiceH;
@@ -492,14 +492,14 @@ class StatRoller extends Component {
         let pickL;
         let pickS;
 
-        let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
+        let randRace = sample(baseRace);
         let rolledRace;
         let rolledHP = this.rollThatClass();
         if (randRace === 'Dwarf') {
             rolledRace = sample(baseDwarf)
             if (rolledRace === 'Hill Dwarf') {
                 const pick = ["Mason's Tools", "Brewer's Tools", "Smith's Tools"];
-                let select = pick[Math.floor(Math.random() * pick.length)];
+                let select = sample(pick);
                 this.setState({
                     race: rolledRace,
                     hp: rolledHP.classHP + 1,
@@ -517,7 +517,7 @@ class StatRoller extends Component {
             }
             if (rolledRace === 'Mountain Dwarf') {
                 const pick = ["Mason's Tools", "Brewer's Tools", "Smith's Tools"];
-                let select = pick[Math.floor(Math.random() * pick.length)];
+                let select = sample(pick);
                 this.setState({
                     race: rolledRace,
                     resistance: "Poison",
@@ -536,12 +536,12 @@ class StatRoller extends Component {
         }
 
         else if (randRace === 'Elf') {
-            rolledRace = baseElf[Math.floor(Math.random() * baseElf.length)];
+            rolledRace = sample(baseElf);
             if (rolledRace === 'High Elf') {
                 const pickL = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"];
-                let choiceL = pickL[Math.floor(Math.random() * pickL.length)];
+                let choiceL = sample(pickL);
                 const pickE = ["Acid Splash", "Blade Ward", "Chill Touch", "Dancing Lights", "Fire Bolt", "Friends", "Light", "Mage Hand", "Mending", "Minor Illusion", "Poison Spray", "Prestidigitation", "Ray of Frost", "True Strike"];
-                let choiceE = pickE[Math.floor(Math.random() * pickE.length)]
+                let choiceE = sample(pickE)
                 this.setState({
                     race: rolledRace,
                     advantage: "Saving Throws vs Charm",
@@ -610,7 +610,7 @@ class StatRoller extends Component {
             }
         }
         else if (randRace === 'Gnome') {
-            rolledRace = baseGnome[Math.floor(Math.random() * baseGnome.length)];
+            rolledRace = sample(baseGnome);
             if (rolledRace === 'Forest Gnome') {
                 this.setState({
                     race: rolledRace,
@@ -636,7 +636,7 @@ class StatRoller extends Component {
             }
         }
         else if (randRace === 'Halfling') {
-            rolledRace = baseHalfling[Math.floor(Math.random() * baseHalfling.length)];
+            rolledRace = sample(baseHalfling);
             if (rolledRace === 'Lightfoot Halfling') {
                 this.setState({
                     race: rolledRace,
@@ -660,7 +660,7 @@ class StatRoller extends Component {
             }
         }
         else if (randRace === 'Dragonborn') {
-            rolledRace = baseDragonborn[Math.floor(Math.random() * baseDragonborn.length)];
+            rolledRace = sample(baseDragonborn);
             if (rolledRace === 'Black Dragonborn') {
                 this.setState({
                     race: rolledRace,
@@ -784,7 +784,7 @@ class StatRoller extends Component {
         }
         else if (randRace === 'Human') {
             const pickH = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc", "Elvish "];
-            choiceH = pickH[Math.floor(Math.random() * pickH.length)];
+            choiceH = sample(pickH);
             this.setState({
                 race: randRace,
                 size: "Medium",
@@ -796,12 +796,12 @@ class StatRoller extends Component {
         }
         else if (randRace === 'HalfElf') {
             pickL = ["Dwarvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"];
-            choiceL = pickL[Math.floor(Math.random() * pickL.length)];
+            choiceL = sample(pickL);
             pickS = ["Acrobatics", "Animal", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"];
-            rand1 = pickS[Math.floor(Math.random() * pickS.length)];
-            rand2 = pickS[Math.floor(Math.random() * pickS.length)];
+            rand1 = sample(pickS);
+            rand2 = sample(pickS);
             if (rand1 === rand2) {
-                rand2 = pickS[Math.floor(Math.random() * pickS.length)];
+                rand2 = sample(pickS);
             }
             this.setState({
                 race: "Half-Elf",
@@ -857,7 +857,7 @@ class StatRoller extends Component {
     }
     rollThatBackground() {
         const mainArr = ["Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin"];
-        let randoBG = mainArr[Math.floor(Math.random() * mainArr.length)];
+        let randoBG = sample(mainArr);
         this.setState({
             background: randoBG
         })
@@ -1106,7 +1106,7 @@ class StatRoller extends Component {
             const halfelf = ["str", "dex", "con", "int", "wis"];
             let rand1 = sample(halfelf);
             let rand2 = sample(halfelf);
-            if (rand1 === rand2) {
+            if (rand1 === rand2) { 
                 rand2 = sample(halfelf);
             }
             if (rand1 === "str") {
