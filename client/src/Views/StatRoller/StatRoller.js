@@ -1103,11 +1103,11 @@ class StatRoller extends Component {
         }
         else if (race === "Half-Elf") {
             console.log("Val 1: " + val1 + ", Val 2: " + val2)
-            const halfelfXD = ["str", "dex", "con", "int", "wis"];
-            let rand1 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
-            let rand2 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
+            const halfelf = ["str", "dex", "con", "int", "wis"];
+            let rand1 = sample(halfelf);
+            let rand2 = sample(halfelf);
             if (rand1 === rand2) {
-                rand2 = halfelfXD[Math.floor(Math.random() * halfelfXD.length)];
+                rand2 = sample(halfelf);
             }
             if (rand1 === "str") {
                 if (rand2 === "dex") {
