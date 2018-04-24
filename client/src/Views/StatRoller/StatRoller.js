@@ -457,57 +457,7 @@ class StatRoller extends Component {
         let randRace = baseRace[Math.floor(Math.random() * baseRace.length)];
         let rolledRace;
         let rolledHP = this.rollThatClass();
-        // let saveMod;
-        // let saveMod2;
         console.log("Rolled class: " + rolledHP.baseRoll);
-        // if (rolledHP.baseRoll === "Barbarian"){
-        //     saveMod = rolledHP.finalStr;
-        //     saveMod2 = rolledHP.finalCon;
-        // }
-        // else if (rolledHP.baseRoll === "Bard") {
-        //     saveMod = rolledHP.finalDex;
-        //     saveMod2 = rolledHP.finalCha;
-        // }
-        // else if (rolledHP.baseRoll === "Cleric"){
-        //     saveMod = rolledHP.finalWis;
-        //     saveMod2 = rolledHP.finalCha;
-        // }
-        // else if (rolledHP.baseRoll === "Druid"){
-        //     saveMod = rolledHP.finalWis;
-        //     saveMod2 = rolledHP.finalInt;
-        // }
-        // else if (rolledHP.baseRoll === "Fighter"){
-        //     saveMod = rolledHP.finalStr;
-        //     saveMod2 = rolledHP.finalCon;
-        // }
-        // else if (rolledHP.baseRoll === "Monk"){
-        //     saveMod = rolledHP.finalDex;
-        //     saveMod2 = rolledHP.finalStr;
-        // }
-        // else if (rolledHP.baseRoll === "Paladin"){
-        //     saveMod = rolledHP.finalWis;
-        //     saveMod2 = rolledHP.finalCha;
-        // }
-        // else if (rolledHP.baseRoll === "Ranger"){
-        //     saveMod = rolledHP.finalDex;
-        //     saveMod2 = rolledHP.finalStr;
-        // }
-        // else if (rolledHP.baseRoll === "Rogue"){
-        //     saveMod = rolledHP.finalDex;
-        //     saveMod2 = rolledHP.finalInt
-        // }
-        // else if (rolledHP.baseRoll === "Sorcerer"){
-        //     saveMod = rolledHP.finalCon;
-        //     saveMod2 = rolledHP.finalCha;
-        // }
-        // else if (rolledHP.baseRoll === "Warlock"){
-        //     saveMod = rolledHP.finalWis;
-        //     saveMod2 = rolledHP.finalCha;
-        // }
-        // else if (rolledHP.baseRoll === "Wizard") {
-        //     saveMod = rolledHP.finalWis;
-        //     saveMod2 = rolledHP.finalInt;
-        // }
         if (randRace === 'Dwarf') {
             rolledRace = baseDwarf[Math.floor(Math.random() * baseDwarf.length)]
             if (rolledRace === 'Hill Dwarf') {
