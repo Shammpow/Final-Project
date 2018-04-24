@@ -166,8 +166,7 @@ const Home = props =>
             <br />
             <ul className="wallOfText backgroundStuff list-group">
             <li className="background list-group-item">
-              Background: {props.todo}.
-              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Background: {props.background}.
             </li>
           </ul>
 
@@ -261,9 +260,6 @@ const Home = props =>
               Survival: {props.survival}
             </li>
           </ul>
-
-
-
 
         </div>
       </div>
