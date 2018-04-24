@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Metamorphous');
+
+$Metamorphous: 'Metamorphous', cursive;
 .roller {
+    font-family: $Metamorphous;
     img {
         width: 25px;
         margin-left: 3px;
@@ -13,6 +17,6 @@
     #classTitle {
         padding-left: 100px;
         padding-right: 100px;
-        margin-bottom: 15px
+        margin-bottom: 15px;
     }
 }
