@@ -56,7 +56,47 @@ const Home = props =>
             <li className="languages list-group-item">
               Languages: {props.languages}
             </li>
+            
           </ul>
+          <ul className="personStuff list-group">
+            <li className="skills list-group-item">
+              Skill Proficiency: {props.profSkills}
+            </li>
+          </ul>
+
+          <br />
+
+          <ul className="personStuff list-group">
+            <li className="acrobatics list-group-item">
+              Acrobatics: {props.acrobatics}
+            </li>
+            <li className="animal list-group-item">
+              Animal Handling: {props.animal}
+            </li>
+
+            <li className="arcana list-group-item">
+              Arcana: {props.arcana}
+            </li>
+            <li className="athletics list-group-item">
+              Athletics: {props.athletics}
+            </li>
+            <li className="deception list-group-item">
+              Deception: {props.deception}
+            </li>
+            <li className="history list-group-item">
+              History: {props.history}
+            </li>
+            <li className="insight list-group-item">
+              Insight: {props.insight}
+            </li>
+            <li className="intimidation list-group-item">
+              Intimidation: {props.intimidation}
+            </li>
+            <li className="investigation list-group-item">
+              Investigation: {props.investigation}
+            </li>
+          </ul>
+
 
         </div>
         <div className="col-sm">
@@ -103,10 +143,6 @@ const Home = props =>
               <br></br>
               Spells: {props.spells}
             </li>
-              <li className="resistances list-group-item">
-                Resistances: {props.todo}.
-                Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </li>
             <br />
             </ul>
             <ul className="personStuff list-group">
@@ -127,6 +163,14 @@ const Home = props =>
                 {props.disadvantage}
               </li>
             </ul>
+            <br />
+            <ul className="wallOfText backgroundStuff list-group">
+            <li className="background list-group-item">
+              Background: {props.todo}.
+              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </li>
+          </ul>
+
           </div>
         </div>
 
@@ -185,46 +229,10 @@ const Home = props =>
             </li>
           </ul>
           
+          
 
           <br />
-
           <ul className="personStuff list-group">
-            <li className="skills list-group-item">
-              Skill Proficiency: {props.profSkills}
-            </li>
-          </ul>
-
-          <br />
-
-          <ul className="personStuff list-group">
-            <li className="acrobatics list-group-item">
-              Acrobatics: {props.acrobatics}
-            </li>
-            <li className="animal list-group-item">
-              Animal Handling: {props.animal}
-            </li>
-
-            <li className="arcana list-group-item">
-              Arcana: {props.arcana}
-            </li>
-            <li className="athletics list-group-item">
-              Athletics: {props.athletics}
-            </li>
-            <li className="deception list-group-item">
-              Deception: {props.deception}
-            </li>
-            <li className="history list-group-item">
-              History: {props.history}
-            </li>
-            <li className="insight list-group-item">
-              Insight: {props.insight}
-            </li>
-            <li className="intimidation list-group-item">
-              Intimidation: {props.intimidation}
-            </li>
-            <li className="investigation list-group-item">
-              Investigation: {props.investigation}
-            </li>
             <li className="medicine list-group-item">
               Medicine: {props.medicine}
             </li>
@@ -254,12 +262,8 @@ const Home = props =>
             </li>
           </ul>
 
-          <ul className="wallOfText backgroundStuff list-group">
-            <li className="background list-group-item">
-              Background: {props.todo}.
-              Example Wall of Text to show expansion of the listed items. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </li>
-          </ul>
+
+
 
         </div>
       </div>
